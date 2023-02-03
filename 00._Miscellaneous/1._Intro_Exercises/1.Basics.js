@@ -21,5 +21,7 @@ const number = 1;
 // You cannot touch line 1 or 2
 
 const result = Number(year) + number
+//const result = parseInt(year) + number
+//const result = +year + number
 console.log(result)
 // --------------------------------------
