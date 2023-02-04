@@ -17,7 +17,8 @@ const friends = [];
 friends.push(
     { name: "Thomas", age: 25 },
     { name: "Simon", age: 25 },
-    { name: "Philip", age: 24 });
+    { name: "Philip", age: 24 }
+    );
 
 console.log(friends);
 
@@ -57,9 +58,6 @@ console.log(diet);
 // Exercise 6 - Copy array
 
 // You really like your daily diet from last exercise. Copy it to a new array called dinnerTray so you can give it to a friend.  
-
-// casual way
-const dinnerTray1 = diet;
 
 //using concat
 const dinnerTray2 = [].concat(diet);
