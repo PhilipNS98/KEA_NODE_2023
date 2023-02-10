@@ -28,6 +28,19 @@ app.get("/about", (req, res) => {
 });
 
 
+// /bat?adjective=spooky
+app.get("/bat", (req, res) => {
+    console.log(req.query)
+    res.send({ message: `The bat is ` });
+})
+
+// /bottle/large
+app.get("/bottle/:bottleSize", (req, res) => {
+    console.log(req.params);
+    res.send({ bottleSize: req.params.bottleSize });
+})
+
+
 
 
 
