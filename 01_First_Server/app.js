@@ -1,8 +1,10 @@
 //import and instansiate
-const app = require("express")();
+/* const app = require("express")(); */
 
-/*  const express = require("express");
- const app = express(); */
+ const express = require("express");
+ const app = express();
+
+ app.use(express.json())
 
 // route (entire thing)
 // HTTP method
@@ -64,6 +66,11 @@ app.get("/kickthedinosaur", (req, res) => {
 
 
 
+
+app.post("/package", (req, res) => {
+    console.log(req.body)
+    res.send({ message: req.body });
+})
 
 //listen to the port 8080 (dev port)
 app.listen(8080);
