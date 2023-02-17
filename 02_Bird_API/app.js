@@ -37,6 +37,16 @@ app.get('/birds/:id', (req, res) => {
     res.send({data: bird});
   });
 
+  app.put('/birds/:id', (req, res) => {
+    const birdId = Number(req.params.id);
+    const updatedBird = req.body;
+  
+    // Update the bird in the data store using birdId and updatedBird in the splice method
+    birds.splice(birdId, 1, updatedBird);
+    
+    res.status(200).send(`Bird with ID ${birdId} updated successfully`);
+  });
+
  //Listen for a connection and a callback function to log that the server is running
 app.listen(8080, () => {
     console.log("Server is running on port", 8080);
