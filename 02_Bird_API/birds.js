@@ -69,6 +69,20 @@ const birds = [
         "lifeSpan": "20-30 years",
         "conservationStatus": "Endangered"
     },
+    {
+        "id": 6,
+        "name": "Snowy Owl",
+        "scientificName": "Bubo scandiacus",
+        "family": "Strigidae",
+        "description": "The Snowy Owl is a large, white owl that lives in the Arctic tundra. It has a wingspan of up to 5 feet and can weigh up to 6.6 pounds.",
+        "range": "Found in the Arctic tundra and in some parts of Canada, Alaska, and the northern United States",
+        "size": {
+            "height": "52-71 cm",
+            "weight": "1.6-3 kg"
+        },
+        "lifeSpan": "9-10 years",
+        "conservationStatus": "Vulnerable"
+    }
 ]
 
 

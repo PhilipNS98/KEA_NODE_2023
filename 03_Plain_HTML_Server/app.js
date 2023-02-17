@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+// Tells the Express server to serve static files from the "public" directory.
 app.use(express.static("public"));
 
 //GET ALL FRONTAPGE
