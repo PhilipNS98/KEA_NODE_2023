@@ -5,12 +5,12 @@ const app = express();
 // Instansiating the birds array
 const birds = require("./birds");
 
-// Adds a middleware function to the express application.
-// The ´express.json()´ middleware parses incoming JSON payloads and
-// Makes it available under the ´req.body´ property.
-// It allows the server to accept and parse JSON data sent in the request body.
-app.use(express.json());
-
+/*  Adds a middleware function to the express application.
+    The ´express.json()´ middleware parses incoming JSON payloads and
+    Makes it available under the ´req.body´ property.
+    It allows the server to accept and parse JSON data sent in the request body.
+    app.use(express.json());
+*/
 app.get("/birds", (req, res) => {
     res.send({ data: birds })
 })
