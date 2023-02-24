@@ -1,10 +1,10 @@
 //import and instansiate
 /* const app = require("express")(); */
 
- const express = require("express");
- const app = express();
+const express = require("express");
+const app = express();
 
- app.use(express.json())
+app.use(express.json())
 
 // route (entire thing)
 // HTTP method
@@ -44,9 +44,27 @@ app.get("/bottle/:bottleSize", (req, res) => {
 
 
 
+/* Time */
+app.get("/time/time", (req, res) => {
+    res.send({
+        timeUTC: new Date(),
+        timeLocal: Date(),
+        unixTimeStamp: Date.now()
+    });
+});
 
 
+//assignment get the current day and month in english
 
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+app.get("/time/day", (req, res) => {
+    res.send({ data: days[new Date().getDay()] });
+})
+
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oktober", "November", "december"]
+app.get("/time/month", (req, res) => {
+    res.send({ data: months[new Date().getMonth()] });
+})
 
 /**assignment
  *  create a new route that kicks the dinosaur
@@ -61,7 +79,7 @@ app.get("/kickthedinosaur", (req, res) => {
         message: `Dinosaur has been kicked 
         ${kicks} times`,
         dinosaur: `dinosaur said ow ow ow ${ows} times`
-    }); 
+    });
 });
 
 
