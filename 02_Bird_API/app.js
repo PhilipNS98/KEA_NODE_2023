@@ -5,6 +5,8 @@ const app = express();
 // Instansiating the birds array
 const birds = require("./birds");
 
+let currentId = 6;
+
 /*  Adds a middleware function to the express application.
     The ´express.json()´ middleware parses incoming JSON payloads and
     Makes it available under the ´req.body´ property.
@@ -33,8 +35,7 @@ app.get('/birds/:id', (req, res) => {
 
 app.post('/birds/', (req, res) => {
     const bird = req.body;
-    //without using push:
-    /* birds = [...birds, bird] */
+    bird.id = ++currentId;
     birds.push(bird);
     res.send({ data: bird });
 });
@@ -113,33 +114,30 @@ app.put('/birds', (req, res) => {
     res.status(200).send(`Birds updated successfully`);
 });
 
-app.patch('/birds/:id', (req, res) => {
-    const birdId = Number(req.params.id);
-    const bird = birds.find(bird => bird.id === birdId);
-
-    if (!bird) {
-        res.status(404).send('Bird not found');
+app.patch("/birds/:id", (req, res) => {
+    const foundBirdIndex = birds.findIndex(bird => bird.id === Number(req.params.id));
+    
+    if (foundBirdIndex === -1) {
+        res.status(404).send({ message: `No bird with id: ${req.params.id}`});
     } else {
-        const updatedBird = {
-            ...bird, // Use spread operator to copy existing bird properties
-            ...req.body, // Overwrite any changed properties
-            id: birdId // Ensure id remains the same
-        };
+        const foundBird = birds[foundBirdIndex];
+        const updatedBird = { ...foundBird, ...req.body, id: foundBird.id };
+        birds[foundBirdIndex] = updatedBird;
 
-        birds.splice(birds.indexOf(bird), 1, updatedBird);
         res.send({ data: updatedBird });
     }
 });
 
-app.delete('/birds/:id', (req, res) => {
-    const birdId = Number(req.params.id);
-    const bird = birds.find(bird => bird.id === birdId);
-    if (bird === -1) {
-      return res.status(404).send('Bird not found');
+
+app.delete("/birds/:id", (req, res) => {
+    const foundBird = birds.findIndex(bird => bird.id === Number(req.params.id));
+    if (foundBird === -1) {
+        res.status(404).json({ message: `No bird with id: ${req.params.id}`});
+    } else {
+        const deletedbird = birds.splice(foundBird, 1)[0];
+        res.status(200).json({ data: deletedbird, message: 'Deleted successfully!' });
     }
-    birds.splice(bird, 1);
-    res.send(`Bird with id ${birdId} deleted`);
-  });
+}); 
 
 //Listen for a connection and a callback function to log that the server is running
 app.listen(8080, () => {
