@@ -27,8 +27,24 @@ app.get("/visitors", (req, res) => {
     res.sendFile(__dirname + "/public/visitors/visitors.html")
 })
 
-
 //API
+
+//GET COUNTDOWN
+app.get('/countdown', (req, res) => {
+    const { targetDate } = req.query;
+
+    const targetTime = new Date(targetDate).getTime();
+    const currentTime = new Date().getTime();
+    const remainingTime = targetTime - currentTime;
+
+    const seconds = Math.floor((remainingTime / 1000) % 60);
+    const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
+    const hours = Math.floor((remainingTime / 1000 / 60 / 60) % 24);
+    const days = Math.floor(remainingTime / 1000 / 60 / 60 / 24);
+
+    const countdown = { days, hours, minutes, seconds };
+    res.send({ data: countdown });
+});
 
 //GET tanks
 app.get("/api/tanks", (req, res) => {
