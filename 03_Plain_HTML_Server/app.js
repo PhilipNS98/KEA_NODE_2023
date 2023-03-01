@@ -6,8 +6,8 @@ app.use(express.static("public"));
 
 const tanks = [
     { name: "Leopard", nationality: "Germany" },
-    {name: "Tiger", nationality: "Germany", year: "1943" },
-    {name: "M1 Abrams", version: "M1" }
+    { name: "Tiger", nationality: "Germany", year: "1943" },
+    { name: "M1 Abrams", version: "M1" }
 ];
 
 let visitorCount = 0;
@@ -32,18 +32,18 @@ app.get("/visitors", (req, res) => {
 
 //GET tanks
 app.get("/api/tanks", (req, res) => {
-res.send({data: tanks});
+    res.send({ data: tanks });
 })
 
 //GET visitor count
 app.get("/api/visitors", (req, res) => {
-    res.send({data: visitorCount});
-    })
-    
+    res.send({ data: visitorCount });
+})
+
 //PUT increment visitor count
 app.put("/api/visitors", (req, res) => {
-    res.send({data: ++visitorCount});
-    })    
+    res.send({ data: ++visitorCount });
+})
 
 //POST
 
@@ -55,7 +55,7 @@ app.put("/api/visitors", (req, res) => {
 
 const PORT = 8080;
 app.listen(PORT, (error) => {
-    if(error){
+    if (error) {
         console.log(error)
         return;
     }
