@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 // Tells the Express server to serve static files from the "public" directory.
-app.use(express.static("public"));
-
+app.use(express.static(path.join(__dirname, "public")));
 
 const tanks = [
     { name: "Leopard", nationality: "Germany" },
@@ -16,8 +16,8 @@ let visitorCount = 0;
 
 //GET ALL FRONTAPGE
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/frontpage/frontpage.html")
-})
+    res.sendFile(path.join(__dirname, "public/frontpage/frontpage.html"));
+});
 // GET ALL TANKS
 app.get("/tanks", (req, res) => {
     res.sendFile(__dirname + "/public/tanks/tanks.html")
