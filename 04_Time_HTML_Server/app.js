@@ -3,22 +3,11 @@ const app = express();
 // Tells the Express server to serve static files from the "public" directory.
 app.use(express.static("public"));
 
-
-const tanks = [
-    { name: "Leopard", nationality: "Germany" },
-    {name: "Tiger", nationality: "Germany", year: "1943" },
-    {name: "M1 Abrams", version: "M1" }
-];
-
 // PAGES    
 
 //GET ALL TIME
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/time/time.html")
-})
-// GET ALL TANKS
-app.get("/tanks", (req, res) => {
-    res.sendFile(__dirname + "/public/tanks/tanks.html")
 })
 
 //API
