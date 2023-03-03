@@ -1,0 +1,32 @@
+{
+  "name": "upper",
+  "version": "0.0.1",
+  "description": "A motivation app with jokes, quotes and daily commands",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilipNS98/KEA_NODE_2023.git"
+  },
+  "keywords": [
+    "motivation",
+    "jokes",
+    "quotes",
+    "commands",
+    "happy",
+    "good",
+    "time"
+  ],
+  "author": "PhilipNS98",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PhilipNS98/KEA_NODE_2023/issues"
+  },
+  "homepage": "https://github.com/PhilipNS98/KEA_NODE_2023#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
