@@ -27,6 +27,9 @@ app.get("/visitors", (req, res) => {
     res.sendFile(__dirname + "/public/visitors/visitors.html")
 })
 
+app.get("/museumGuards", (req, res) => {
+    res.sendFile(__dirname + "/public/museumGuards/museumGuards.html");
+})
 //API
 
 //GET COUNTDOWN
