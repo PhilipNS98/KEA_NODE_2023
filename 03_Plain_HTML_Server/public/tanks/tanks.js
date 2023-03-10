@@ -36,4 +36,9 @@ fetch("/api/tanks")
   document.getElementById("tanks-wrapper").appendChild(tankDiv);
 });
 
+//assignment redirect a user to /visitors after they've been to the museum for three seconds... write everything in this file
+setTimeout(() => {
+  window.location.href = "/visitors";
+}, 3000);
+
 
