@@ -64,6 +64,14 @@ app.put("/api/visitors", (req, res) => {
     res.send({ data: ++visitorCount });
 })
 
+//Server side redirection
+app.get("/api/guards", (req, res) => {
+    if (req.query.passport === "theskyisblue") {
+       return res.redirect("/api/tanks");
+    } 
+        res.send({ message: "You are not allowed to see the tanks. Give us the secret in the query string  with the key being passport" })
+    
+});
 //POST
 
 //PUT
