@@ -4,8 +4,8 @@ import path from "path";
 const app = express();
 app.use(express.static("public"));
 
-/* import jokes from "./util/jokes.js"
-console.log(jokes); */
+import jokes from "./util/jokes.js"
+console.log(await jokes.getJoke());
 
 //Pages (routes)
 
