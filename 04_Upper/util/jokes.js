@@ -27,6 +27,4 @@ async function getJoke() {
         return result;
     }
 }
-export default {
-    getJoke
-}
+export default getJoke;

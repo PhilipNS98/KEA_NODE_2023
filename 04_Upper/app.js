@@ -2,26 +2,23 @@ import express from "express";
 import path from "path";
 import renderPage from "./util/templateEngine.js";
 import fs from "fs";
-/* import jokes from "./util/jokes.js"
- */import templateEngine from "./util/templateEngine.js";
+import getJoke from "./util/jokes.js"
+import templateEngine from "./util/templateEngine.js";
+import escape from "escape-html"
+
 
 const app = express();
 app.use(express.static("public"));
 /* console.log(await jokes.getJoke());
  */
 
-const frontpage = templateEngine.readPage(`frontpage/frontpage.html`); 
-const frontpagePage = templateEngine.renderPage(frontpage, { tabTitle: "Upper | Motivation"});
+const frontpage = templateEngine.readPage(`frontpage/frontpage.html`);
+const frontpagePage = templateEngine.renderPage(frontpage, { tabTitle: "Upper | Motivation" });
 
-const jokes = templateEngine.readPage(`jokes/jokes.html`);
-const jokespagePage = templateEngine.renderPage(jokes, 
-    {
-        tabTitle: "Upper | Jokes",
-        cssLink: '<link rel="stylesheet" href="/pages/jokes/jokes.css">'
-});
+
 
 const IRLQuests = templateEngine.readPage(`IRLQuests/IRLQuests.html`);
-const IRLQuestsPage = templateEngine.renderPage(IRLQuests, { tabTitle: "Upper | IRLQuests"});
+const IRLQuestsPage = templateEngine.renderPage(IRLQuests, { tabTitle: "Upper | IRLQuests" });
 
 
 
@@ -37,20 +34,29 @@ const IRLQuestsPage = templateEngine.renderPage(IRLQuests, { tabTitle: "Upper | 
 // Constructed pages
 
 app.get('/', (req, res) => {
-   res.send(frontpagePage);
+    res.send(frontpagePage);
 });
 
 app.get('/IRLQuests', (req, res) => {
-/* res.sendFile(path.resolve(pagesRoot, "IRLQuests/IRLQuests.html"));
- */
-res.send(IRLQuestsPage);
+    /* res.sendFile(path.resolve(pagesRoot, "IRLQuests/IRLQuests.html"));
+     */
+    res.send(IRLQuestsPage);
 
 });
 
-app.get('/jokes', (req, res) => {
-/*     res.sendFile(path.resolve(pagesRoot, 'jokes/jokes.html'))
- */
-res.send(jokespagePage);
+app.get('/jokes', async (req, res) => {
+    /*     res.sendFile(path.resolve(pagesRoot, 'jokes/jokes.html'))
+     */
+    const joke = await getJoke();
+    const jokes = templateEngine.readPage(`jokes/jokes.html`)
+        .replace("$JOKE", JSON.stringify(joke));
+    const jokespagePage = templateEngine.renderPage(jokes,
+        {
+            tabTitle: "Upper | Jokes",
+            cssLink: '<link rel="stylesheet" href="/pages/jokes/jokes.css">'
+        });
+
+    res.send(jokespagePage);
 });
 
 //API

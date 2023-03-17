@@ -1,5 +1,7 @@
 import fs from "fs";
 
+import escape from "escape-html"
+console.log(escape("<script>csgsdgg /script>"))
 
 const components = "public/components/"
 const pagesRoot = "public/pages/"
