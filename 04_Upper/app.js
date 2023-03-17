@@ -1,37 +1,40 @@
 import express from "express";
 import path from "path";
+import renderPage from "./util/templateEngine.js";
+import fs from "fs";
+/* import jokes from "./util/jokes.js"
+ */import templateEngine from "./util/templateEngine.js";
 
 const app = express();
 app.use(express.static("public"));
-
-import jokes from "./util/jokes.js"
 /* console.log(await jokes.getJoke());
  */
 
-const pagesRoot = "public/pages/"
+const frontpage = templateEngine.readPage(`frontpage/frontpage.html`); 
+const frontpagePage = templateEngine.renderPage(frontpage, { tabTitle: "Upper | Motivation"});
+
+const jokes = templateEngine.readPage(`jokes/jokes.html`);
+const jokespagePage = templateEngine.renderPage(jokes, 
+    {
+        tabTitle: "Upper | Jokes",
+        cssLink: '<link rel="stylesheet" href="/pages/jokes/jokes.css">'
+});
+
+const IRLQuests = templateEngine.readPage(`IRLQuests/IRLQuests.html`);
+const IRLQuestsPage = templateEngine.renderPage(IRLQuests, { tabTitle: "Upper | IRLQuests"});
 
 
 
-import fs from "fs";
 // Components
 // task read the navbar and the footer here
-const navbar = fs.readFileSync("./public/components/navbar/navbar.html").toString();
-const footer = fs.readFileSync("./public/components/footer/footer.html").toString();
 
 //Pages (routes)
-const frontpage = fs.readFileSync(`${pagesRoot}frontpage/frontpage.html`).toString();
 // task read the other files and serve them
-const IRLQuests = fs.readFileSync(`${pagesRoot}IRLQuests/IRLQuests.html`).toString();
-const jokespage = fs.readFileSync(`${pagesRoot}jokes/jokes.html`).toString();
 
 
 
 
 // Constructed pages
-const frontpagePage = navbar.replace("%%DOCUMENTTITLE%%", "Upper | Motivation") + frontpage + footer;
-const IRLQuestsPage = navbar.replace("%%DOCUMENTTITLE%%", "Upper | IRLQuests") + IRLQuests + footer;
-const jokespagePage = navbar.replace("%%DOCUMENTTITLE%%", "Upper | Jokes") + jokespage + footer;
-
 
 app.get('/', (req, res) => {
    res.send(frontpagePage);
