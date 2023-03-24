@@ -65,14 +65,12 @@ app.get('/jokes', async (req, res) => {
 
 
 
+//Accessing environmental variables looks at script in package.json file
 
-
-
-
-
+console.log(process.env.PORT);
 
 // PORT
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, (error) => {
     if (error) {
         console.log(error);

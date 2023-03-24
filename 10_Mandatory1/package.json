@@ -1,0 +1,17 @@
+{
+  "name": "mandatory",
+  "version": "0.0.1",
+  "description": "A documentation app with descriptions and code examples",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mandatory",
+    "documentation",
+    "code",
+    "examples"
+  ],
+  "author": "PhilipNS98",
+  "license": "MIT"
+}
