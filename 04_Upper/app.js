@@ -66,8 +66,10 @@ app.get('/jokes', async (req, res) => {
 
 
 //Accessing environmental variables looks at script in package.json file
-
 console.log(process.env.PORT);
+//controlling what environment im in
+console.log(process.env.ENV);
+
 
 // PORT
 const PORT = process.env.PORT || 8080;
