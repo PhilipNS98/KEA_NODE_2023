@@ -9,6 +9,7 @@ import escape from "escape-html"
 
 const app = express();
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 /* console.log(await jokes.getJoke());
  */
 
@@ -20,7 +21,8 @@ const frontpagePage = templateEngine.renderPage(frontpage, { tabTitle: "Upper | 
 const IRLQuests = templateEngine.readPage(`IRLQuests/IRLQuests.html`);
 const IRLQuestsPage = templateEngine.renderPage(IRLQuests, { tabTitle: "Upper | IRLQuests" });
 
-
+const contact = templateEngine.readPage("contact/contact.html");
+const contactPage = templateEngine.renderPage(contact, {tabTitle: "Upper | Contact"});
 
 // Components
 // task read the navbar and the footer here
@@ -59,8 +61,17 @@ app.get('/jokes', async (req, res) => {
     res.send(jokespagePage);
 });
 
+app.get("/contact", (req, res) => {
+res.send(contactPage);
+})
+
 //API
 
+app.post("/api/contact", (req, res) => {
+    console.log(req.body);
+//  res.send(req.body);
+    res.redirect("/");
+})
 
 
 
