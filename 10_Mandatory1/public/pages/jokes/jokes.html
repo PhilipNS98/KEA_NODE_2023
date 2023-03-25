@@ -1,0 +1,12 @@
+<h1>Jokes</h1>
+
+<div id="joke"></div>
+
+<script>
+    const joke = $JOKE;
+    if (joke.delivery) {
+        document.getElementById("joke").innerText = joke.setup + " : " + joke.delivery;
+    } else {
+        document.getElementById("joke").innerText = joke.joke;
+    }
+</script>

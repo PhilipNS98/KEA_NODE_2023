@@ -1,0 +1,188 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Section Selector -->
+        <div class="col-md-3">
+            <div class="section-selector-container">
+                <div class="section-selector">
+                    <ul>
+                        <li><a href="#section-1">Getting Started</a></li>
+                        <li><a href="#section-2">Section 2</a></li>
+                        <li><a href="#section-3">Section 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!-- Main Content -->
+            <div class="content">
+                <h1>Step-by-step guide: express library</h1>
+                <br>
+                <h2 id="section-1">Getting Started</h2>
+                <p>This will serve as a beginners guide on how to implement the express library into your project.</p>
+                <p>Before we begin make sure you have Node.js installed on your computer.</p>
+                <p>For information on how to install Node.js on your computer follow this link below:</p>
+                <a href="https://nodejs.org/en" target="_blank"> download the latest version of Node.js from the
+                    official website.</a>
+                <br>
+                <br>
+                <p> To start off, you would want to create a directory for your project. </p>
+                <p>If you are creating a project in Visual Studio Code, simply start by creating a folder in the
+                    workspace you want on your computer.</p>
+                <img src="/assets/images/frontpage/getting-started.01.png" width="80%" height="80%" alt="guide">
+                <br>
+                <br>
+                <p>When a directory has been created, right click on the folder and open it in terminal.</p>
+                <br>
+                <img src="/assets/images/frontpage/getting-started.02.png" width="80%" height="80%" alt="guide">
+                <br>
+                <br>
+                <p>To open your folder in Visual Studio Code, write "code ." in the terminal.</p>
+                <img src="/assets/images/frontpage/getting-started.03.png" width="80%" height="80%" alt="guide">
+                <br>
+                <br>
+                <p>Now that you have a folder open in Visual Studio Code, you can begin to create a Node.js project
+                    using the terminal command in the CLI</p>
+
+
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code1')">Copy code</button>
+                    </div>
+                    <code id="code1">npm init</code>
+                </div>
+                <br>
+                <p>This command will create a package.json file that contains information about your project and its
+                    dependencies.</p>
+                <p>Here is an example of how a npm init form can look like:</p>
+                <img src="/assets/images/frontpage/npm_init_example.png" width="80%" height="80%" alt="guide">
+                <br>
+                <br>
+                <p>Now that the package.json file is created, you can install the express library either by manually
+                    typing "express" under the dependencies in the package.json file followed by the "npm i" command, or
+                    run the following command in the
+                    CLI:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code2')">Copy code</button>
+                    </div>
+                    <code id="code2">npm i express</code>
+                </div>
+                <br>
+                <p>This command will download and install the latest version of the Express library and save it as a
+                    dependency in your project's package.json file.
+                </p>
+                <p>Now that express is installed, you need to create your main application file. In the npm init example
+                    i showed, i called my main for "app.js" but you can also call it "index.js" if you prefer that.</p>
+                <p>In this guide, we will call the file "app.js" and it must be created in the top scope of the projects
+                    directory on the same scope as your package.json file.</p>
+                <br>
+                <p>In your app.js file you can import the Express library using the following code:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code3')">Copy code</button>
+                    </div>
+                    <code id="code3">const express = require('express');
+                        </code>
+                </div>
+                <br>
+                <p>Then you want to instantiate an Express application object by calling the express() function: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code4')">Copy code</button>
+                    </div>
+                    <code id="code4">const app = express();
+                        </code>
+                </div>
+                <br>
+                <p>Now you want to define one or more route handlers for your application by calling methods on the app
+                    object, such as app.get(), app.post(), etc. </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code5')">Copy code</button>
+                    </div>
+                    <code id="code5">
+                                app.get('/', (req, res) => {
+                                res.send('Hello World!');
+                            }); 
+                        </code>
+                </div>
+                <br>
+                <p>This code defines a route handler for the root URL of your application. When a client makes a GET
+                    request to the root URL, the function passed as the second argument will be executed. In this case,
+                    the function sends the string 'Hello World!' as the response.</p>
+                <p>All there is left to do is to start the server by calling the listen() method on the app object:</p>
+
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code6')">Copy code</button>
+                    </div>
+                    <code id="code6">
+                            const PORT = 3000;
+
+                            app.listen(PORT, () => {
+                              console.log(`Server listening on port ${PORT}`);
+                            });                            
+                            </code>
+                </div>
+                <br>
+                <p>This code starts the server on port 3000 and logs a message to the console when the server is ready
+                    to receive requests.</p>
+                <p>To run your application, execute the following command in the CLI:</p>
+
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code6')">Copy code</button>
+                    </div>
+                    <code id="code6">
+                        node app.js                           
+                            </code>
+                </div>
+                <br>
+                <p>This will start the server and your application will be accessible at http://localhost:3000 in your
+                    web browser.</p>
+                <br>
+                <p>you can also run your app using nodemon, which will automatically restart the application whenever
+                    changes are detected in your code.</p>
+                <p>This can be very useful during development, as it saves you the hassle of having to manually stop and
+                    restart your application every time you make a change.</p>
+
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code7')">Copy code</button>
+                    </div>
+                    <code id="code7">
+                                nodemon.cmd app.js                           
+                            </code>
+                </div>
+                <br>
+                <p>Notice that the command uses nodemon.cmd, that is because it is the windows command for using
+                    nodemon. </p>
+
+
+                <p>Congratulations! You have successfully implemented the Express library in your project.</p>
+                <p>In the next section, i will show you how to serve static files in your express project! </p>
+                <br>
+                
+                <h2 id="section-2">Section 2</h2>
+                <p>Sed mollis nunc eu orci malesuada, vel maximus tortor lacinia. Morbi eget pulvinar justo, at pharetra
+                    mi.
+                    Vestibulum lobortis posuere mauris vel euismod. Vestibulum ultrices fringilla felis at laoreet.
+                    Fusce id ex et
+                    turpis rutrum malesuada. </p>
+
+                <h2 id="section-3">Section 3</h2>
+                <p>Nulla facilisi. Vestibulum mollis arcu nulla, sed tempus nulla commodo nec. Vestibulum quis sodales
+                    nibh. Nulla
+                    viverra, odio vel consectetur commodo, nisi ipsum consequat elit, non dictum ipsum massa in ex. </p>
+            </div>
+        </div>
+    </div>
+</div>
