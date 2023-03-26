@@ -4,12 +4,13 @@ import templateEngine from "./util/templateEngine.js";
 
 const app = express();
 app.use(express.static("public"));
+//Used for api/contact
 app.use(express.urlencoded({ extended: true }));
 
 
 const frontpage = templateEngine.readPage(`frontpage/frontpage.html`);
 const frontpagePage = templateEngine.renderPage(frontpage, { tabTitle: "Mandatory | Express",
-cssLink: '<link rel="stylesheet" href="/pages/frontpage/frontpage.css">' });
+cssLink: '<link rel="stylesheet" href="/assets/css/frontpage.css">' });
 
 const IRLQuests = templateEngine.readPage(`IRLQuests/IRLQuests.html`);
 const IRLQuestsPage = templateEngine.renderPage(IRLQuests, { tabTitle: "Mandatory | IRLQuests" });

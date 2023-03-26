@@ -6,8 +6,8 @@
                 <div class="section-selector">
                     <ul>
                         <li><a href="#section-1">Getting Started</a></li>
-                        <li><a href="#section-2">Section 2</a></li>
-                        <li><a href="#section-3">Section 3</a></li>
+                        <li><a href="#section-2">Serving Static Files</a></li>
+                        <li><a href="#section-3">Custom Template</a></li>
                     </ul>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code3')">Copy code</button>
                     </div>
-                    <code id="code3">const express = require('express');
+                    <code id="code3" class="language-js">const express = require('express');
                         </code>
                 </div>
                 <br>
@@ -94,7 +94,7 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code4')">Copy code</button>
                     </div>
-                    <code id="code4">const app = express();
+                    <code id="code4" class="language-js">const app = express();
                         </code>
                 </div>
                 <br>
@@ -105,10 +105,12 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code5')">Copy code</button>
                     </div>
-                    <code id="code5">
+                    <code id="code5" class="language-js">
                                 app.get('/', (req, res) => {
-                                res.send('Hello World!');
-                            }); 
+                                <br>
+                                &nbsp;&nbsp;res.send('Hello World!');
+                                <br>
+                                &nbsp;}); 
                         </code>
                 </div>
                 <br>
@@ -122,11 +124,13 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code6')">Copy code</button>
                     </div>
-                    <code id="code6">
+                    <code id="code6" class="language-js">
                             const PORT = 3000;
-
-                            app.listen(PORT, () => {
-                              console.log(`Server listening on port ${PORT}`);
+                            <br>
+                            &nbsp;app.listen(PORT, () => {
+                            <br>
+                            &nbsp;&nbsp;console.log(`Server listening on port ${PORT}`);
+                              <br>
                             });                            
                             </code>
                 </div>
@@ -159,7 +163,7 @@
                         <button class="copy-button" onclick="copyCode('code7')">Copy code</button>
                     </div>
                     <code id="code7">
-                                nodemon.cmd app.js                           
+                                nodemon.cmd app.js                        
                             </code>
                 </div>
                 <br>
@@ -170,18 +174,339 @@
                 <p>Congratulations! You have successfully implemented the Express library in your project.</p>
                 <p>In the next section, i will show you how to serve static files in your express project! </p>
                 <br>
-                
-                <h2 id="section-2">Section 2</h2>
-                <p>Sed mollis nunc eu orci malesuada, vel maximus tortor lacinia. Morbi eget pulvinar justo, at pharetra
-                    mi.
-                    Vestibulum lobortis posuere mauris vel euismod. Vestibulum ultrices fringilla felis at laoreet.
-                    Fusce id ex et
-                    turpis rutrum malesuada. </p>
 
-                <h2 id="section-3">Section 3</h2>
-                <p>Nulla facilisi. Vestibulum mollis arcu nulla, sed tempus nulla commodo nec. Vestibulum quis sodales
-                    nibh. Nulla
-                    viverra, odio vel consectetur commodo, nisi ipsum consequat elit, non dictum ipsum massa in ex. </p>
+                <h2 id="section-2">Serving Static Files</h2>
+                <p>This section will serve as continuation guide on how to serve static files in your express project
+                </p>
+                <p>If you haven't followed the Getting Started section, please follow that first so you have an express
+                    project ready. </p>
+                <p>To start off, create a new folder in your main directory called "public". This is where we'll store
+                    our static files, including our HTML files.</p>
+                <p>Once you have created a public folder, you can create a folder structure that fits your specific
+                    needs, but for simplicity, we will just create just create an HTML file inside the "public" folder.
+                    For example, you could create a file called "index.html" and add some basic HTML code to it.</p>
+                <p>Two shorthands for creating basic boilerplate html are "!" and "html:5"</p>
+                <p>this will simplify the parameter arguemnet for the function that will help us serve static files
+                    later on</p>
+                <p>when the basic html file has been created, we will go to the app.js file from earlier</p>
+                <p>below where instantiated the express library, we will tell Express to serve static files from the
+                    "public" folder by adding the following line: </p>
+
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code8')">Copy code</button>
+                    </div>
+                    <code id="code8" class="language-js">
+                            app.use(express.static("public"));                      
+                                </code>
+                </div>
+                <br>
+                <p>This tells Express to look for static files in the "public" folder and serve them as-is.</p>
+                <p>Now we can change our former route to serve our html file from this:</p>
+
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code9')">Copy code</button>
+                    </div>
+                    <code id="code9" class="language-js">
+                                app.get('/', (req, res) => {
+                                    <br>
+                                    &nbsp;&nbsp;res.send('Hello World!');
+                                <br>
+                                &nbsp;}); 
+                        </code>
+                </div>
+                <br>
+                <p>To this: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code10')">Copy code</button>
+                    </div>
+                    <code id="code10" class="language-js">
+                        app.get("/", (req, res) => {
+                            <br>
+                            &nbsp;&nbsp;const html = fs.readFileSync(__dirname + "/public/index.html");
+                            <br>
+                            &nbsp;&nbsp;res.send(html);
+                            <br>
+                            &nbsp;});                          
+                        </code>
+                </div>
+                <br>
+                <p>This tells Express to respond to requests to the root URL ("/") by reading the "index.html" file from
+                    the "public" folder and sending it back as the response.</p>
+                <p>Make sure to import the "fs" module at the top of your file to use the readFileSync method:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code11')">Copy code</button>
+                    </div>
+                    <code id="code11" class="language-js">
+                            const fs = require("fs");                          
+                    </code>
+                </div>
+                <br>
+                <p>If you already have your app to listen to a port from the Getting Started guide, you should now start
+                    your server and navigate to http://localhost:3000 (or whatever port you chose) to see your HTML file
+                    served up by Express. </p>
+                <br>
+                <p>The next section will show you how to make custom templates, for reading and rendering html pages</p>
+                <br>
+                <h2 id="section-3">Custom Template</h2>
+                <p>This section vil cover one way to implement a custom made template for reading and rendering HTML
+                    pages. It will be build upon knowledge learned from the previous two sections and will not cover
+                    technologies previously learned.</p>
+                <p>To start off, we need to created the structure of our project. </p>
+                <p>Up until now we have just had our app.js file and our public folder with our index.html file</p>
+                <p>We will now create a new structure that will give us a better overview of our files, so we have a
+                    better idea of where every file is.</p>
+                <p>firstly we will create 3 folders in the public folder, called assets, components and pages.</p>
+                <p>The assets folder will contain 3 folders called css, images and js. These folders will contain the
+                    files we refer to via link, image and script tags throughout our html pages, so our LOC in our HTML
+                    will be lower.</p>
+                <p>it should look something like this:</p>
+                <img src="/assets/images/frontpage/custom-template.01.png" width="50%" height="50%" alt="guide">
+                <br>
+                <br>
+                <p>Next we will create a components folder that contains 2 folders called navbar and footer.</p>
+                <p>Each folder will contain a html file for the header and the footer for our pages.</p>
+                <p>We do this becuase we want the navbar and the footer to be the exact same throughout our different
+                    pages.</p>
+                <p>It should look like this when implemented:</p>
+                <img src="/assets/images/frontpage/custom-template.02.png" width="50%" height="50%" alt="guide">
+                <br>
+                <br>
+                <p>Now we will create the pages folder, that will contain folders for each html page we are gonna make.
+                </p>
+                <p>In this example we have three pages.</p>
+                <img src="/assets/images/frontpage/custom-template.03.png" width="50%" height="50%" alt="guide">
+                <p>Each of the html files will be a piece in the puzzle of creating a full html page</p>
+                <p>the first part; the navbar, will contain the top part of the html boilerplate code. it includes the
+                    head tag with meta tags and link tags. The start of the body tag and main tag and the header tag.
+                </p>
+                <p>It should look look like this: </p>
+                <img src="/assets/images/frontpage/custom-template.04.png" width="100%" height="100%" alt="guide">
+                <br>
+                <br>
+                <p>Next the html that contains the main html we want to show, that which differenciate the pages from
+                    eachother should only contain plain java</p>
+                <p>it should look like this: </p>
+                <img src="/assets/images/frontpage/custom-template.05.png" width="80%" height="80%" alt="guide">
+                <br>
+                <br>
+                <p>The last piece of the puzzle will be the footer html which will contain the end tags for the main,
+                    body and html tag. It also contains a full footer tag.</p>
+                <p>It should look like this: </p>
+                <img src="/assets/images/frontpage/custom-template.06.png" width="100%" height="100%" alt="guide">
+                <br>
+                <br>
+                <p>Now that we all the files we need we can hold off from these files and create the last folder for
+                    this section.</p>
+                <p>the last folder we will create will be a util folder on the top layer of the directory, the same
+                    layer we created the public folder on. </p>
+                <p>Inside that folder we will create a javascript file called templateEngine.js</p>
+                <p>It should looks like this: </p>
+                <img src="/assets/images/frontpage/custom-template.07.png" width="50%" height="50%" alt="guide">
+                <br>
+                <br>
+                <p>inside the templateEngine.js file we import the the built-in fs module, which provides an API for
+                    interacting with the file system. </p>
+                <p>in this example we are importing the module using the import statement, which was introduced in ES6.
+                </p>
+                <p>for documentation on how to implement that feature to your Node.js project follow the link below</p>
+                <a href="/jokes/#section-1" target="_blank">Implementing type: "module" in your package.json file</a>
+                <br>
+                <br>
+                <p>here is the code for importing the fs module: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code12')">Copy code</button>
+                    </div>
+                    <code id="code12" class="language-js">
+                        import fs from "fs";                          
+                    </code>
+                </div>
+                <br>
+                <p>The next to lines we define two constans, 'components' and 'pageRoot', which hold the root paths for
+                    the component and pages directories, respectively</p>
+                <p>Defining the file paths as constants outside of where we are going to use them provides better
+                    maintainability and flexibility in case the file structure changes in the future.</p>
+                <p>If the path changes, we would need to go through every instance where we are going to read the file
+                    and manually update it with the new path.</p>
+                <p>On the other hand, if we define a constant for the path, we can change the path in one place (i.e.,
+                    in the constant) and all instances where the constant is used will automatically reference the
+                    updated path. This reduces the likelihood of errors in our code and makes it easier to maintain.
+                </p>
+                <p>The code looks like this: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code13')">Copy code</button>
+                    </div>
+                    <code id="code13" class="language-js">
+                        const components = "public/components/"
+                        <br>
+                        &nbsp;const pagesRoot = "public/pages/"                  
+                    </code>
+                </div>
+                <br>
+                <p>We then create two functions, one for reading our HTML path and one rendering our HTML pages.</p>
+                <p>The first one; The renderPage function takes a string page as input, which is the contents of an HTML
+                    page. It then reads the contents of the navbar and footer components using fs.readFileSync, and
+                    replaces any variables in the footer string with the current year using string interpolation (${new
+                    Date().getFullYear()}).</p>
+                <p>What is being replaced are a placeholders we have in the footer and navbar page. It is done to
+                    dynmaically set titles, change styling and update the current year on our pages</p>
+                <p>The function ends with concatenating the three strings (navbar, page, and footer) using the +
+                    operator and returns the result as a single HTML string.</p>
+                <p>the code for the renderPage() function looks like this: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code14')">Copy code</button>
+                    </div>
+                    <code id="code14" class="language-js">
+                        function renderPage(page, config={}) {
+                            <br>
+                            &nbsp;&nbsp;// Components
+                            <br>
+                            &nbsp;&nbsp;const navbar = fs.readFileSync(`${components}navbar/navbar.html`).toString()
+                            <br>
+                            &nbsp;&nbsp;.replace("$TAB_TITLE", config.tabTitle || "Mandatory")
+                            <br>
+                            &nbsp;&nbsp;.replace("$CSS_LINK", config.cssLink || "");
+                            <br>
+                            &nbsp;&nbsp;const footer = fs.readFileSync(`${components}footer/footer.html`).toString()
+                            <br>
+                            &nbsp;&nbsp;.replace("$FOOTER_YEAR", `Copyright © ${new Date().getFullYear()}`)
+                            <br>
+                            <br>
+                            &nbsp;&nbsp;return navbar + page + footer
+                            <br>
+                        }                    
+                    </code>
+                </div>
+                <br>
+                <p>the next function; readPage takes a string pagePath as input, which specifies the path to an HTML
+                    page. It
+                    then uses the readFileSync method to read the contents of the file at that path and returns the
+                    result as a string.</p>
+                <p>The code for readPage should look like this: </p>
+
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code15')">Copy code</button>
+                    </div>
+                    <code id="code15" class="language-js">
+                        function readPage(pagePath){
+                            <br>
+                            &nbsp;&nbsp;return fs.readFileSync(pagesRoot + pagePath).toString();
+                            <br>
+                            }      
+                    </code>
+                </div>
+                <br>
+                <p>Lastly we export the two functions as default.</p>
+                <p>The code for exporting the two functions looks like this: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code16')">Copy code</button>
+                    </div>
+                    <code id="code16" class="language-js">
+                        export default {
+                            <br>
+                            &nbsp;&nbsp;renderPage,
+                            <br>
+                            &nbsp;&nbsp;readPage
+                            <br>
+                        }  
+                    </code>
+                </div>
+                <br>
+                <p>By exporting an object with named functions, other modules can import and use only the functions they
+                    need, rather than importing the entire file and potentially introducing unnecessary dependencies.
+                </p>
+                <p>For example, if another module only needs to use the `renderPage` function, it can import only that
+                    function using `import { renderPage } from './util/templateEngine.js'`.</p>
+                <p>This is a smart template because it allows us to easily render dynamic HTML pages with consistent
+                    headers and footers without having to repeat the same code in each file. By defining a common
+                    `navbar`
+                    and `footer`, we can ensure that all pages have the same look and feel, and by using variables in
+                    the
+                    footer, and navbar we can automatically update the copyright year and dynamically apply specific
+                    stylings and titles without having to edit each file manually.
+                </p>
+                <br>
+                <p>Now that the templateEngine.js file has been created we can implement it in our app.js file.</p>
+                <p>Firstly we navigate to our app.js file.</p>
+                <p>First we import our newly created templateEngine.js file: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code17')">Copy code</button>
+                    </div>
+                    <code id="code17" class="language-js">
+                        import templateEngine from "./util/templateEngine.js";
+                    </code>
+                </div>
+                <br>
+                <p>Then we read the page HTML file using templateEngine.readPage and assign it to the constant
+                    indexpage: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code18')">Copy code</button>
+                    </div>
+                    <code id="code18" class="language-js">
+                        const indexpage = templateEngine.readPage(`index/index.html`);
+                    </code>
+                </div>
+                <br>
+                <p>Then we render the page, by calling the templateEngine.renderPage() method and assigns it to the
+                    constant indexFullPage: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code19')">Copy code</button>
+                    </div>
+                    <code id="code19" class="language-js">
+                            const indexFullPage = templateEngine.renderPage(indexpage, { tabTitle: "Mandatory | Express",
+                            link rel="stylesheet" href="/assets/css/indexpage.css"&gt;' });                    
+                        </code>
+                </div>
+                <br>
+                <p>we are also passing an object with two keys: tabTitle and cssLink. These keys are placeholders in the
+                    HTML
+                    code that will be replaced with the corresponding values from the object we passed.</p>
+
+                <p>Finally we set up the route again for the index page: </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code20')">Copy code</button>
+                    </div>
+                    <code id="code20" class="language-js">
+                        app.get('/', (req, res) => {
+                            <br>
+                            &nbsp;&nbsp;res.send(indexFullPage);
+                            <br>
+                          });                                             
+                        </code>
+                </div>
+                <br>
+                <p>And that's it! In summary, this code sets up a server using the express module, reads the HTML file
+                    for a specific page using a custom templateEngine module, replaces placeholders in the HTML code
+                    with actual data, and sets up a route for the page using express so that users can view the page
+                    when they visit the appropriate URL.</p>
+                <p>Now you can create as many pages as you want using this templateEngine!</p>
+
+
             </div>
         </div>
     </div>
