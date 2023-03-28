@@ -3,6 +3,7 @@
     border: 1px solid #ccc;
     margin: 10px 0;
 }
+
 .code-header {
     display: flex;
     justify-content: space-between;
@@ -11,10 +12,12 @@
     align-items: center;
     margin-bottom: 10px;
 }
+
 .code-header span {
     margin-left: 10px;
     color: #fff;
 }
+
 .code-header button {
     background: #fff;
     background-color: #333;
@@ -23,6 +26,7 @@
     padding: 5px 10px;
     cursor: pointer;
 }
+
 .message {
     position: absolute;
     top: 0;
@@ -34,16 +38,27 @@
     font-weight: bold;
     transition: opacity 0.3s;
 }
+
 .message.show {
     opacity: 1;
 }
-code{
-    margin-left: 7px;
+
+code {
     font-family: monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  background-color: #fff;
-  border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #fff;
+    border-radius: 3px;
+    white-space: pre-line;
 }
 
-  
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 0;
+    padding: 0;
+}

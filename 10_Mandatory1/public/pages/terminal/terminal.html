@@ -1,0 +1,260 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Section Selector -->
+        <div class="col-md-3">
+            <div class="section-selector-container">
+                <div class="section-selector">
+                    <ul>
+                        <li><a href="#section-1">Terminal Commands </a></li>
+                        <li><a href="#section-2">Types in Node</a></li>
+                        <li><a href="#section-3">Soft VS Hard Equality</a></li>
+                        <li><a href="#section-4">Git Commands</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!-- Main Content -->
+            <div class="content">
+                <h2 id="section-1">Terminal Commands</h2>
+                <p>Here are some handy terminal commands to know in general and for Node projects:</p>
+                <p>To welcome you to Node JS and show the version:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code22')">Copy code</button>
+                    </div>
+                    <code id="code22">node --version</code>
+                </div>
+                <br>
+                <p>To perform a soft kill:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code23')">Copy code</button>
+                    </div>
+                    <code id="code23">^C</code>
+                </div>
+                <br>
+                <p>To perform a hard kill:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code24')">Copy code</button>
+                    </div>
+                    <code id="code24">^D</code>
+                </div>
+                <br>
+                <p>To use the prompt that is an interpreter for Node commands:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code25')">Copy code</button>
+                    </div>
+                    <code id="code25">&gt;</code>
+                </div>
+                <br>
+                <p>To clear the terminal screen when in node:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code26')">Copy code</button>
+                    </div>
+                    <code id="code26">console.clear()</code>
+                </div>
+                <br>
+                <p>To run code in Node:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code27')">Copy code</button>
+                    </div>
+                    <code id="code27">node filename.js</code>
+                </div>
+                <br>
+                <p>Here are some additional commands that may be useful:</p>
+                <p>To list files and directories:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code28')">Copy code</button>
+                    </div>
+                    <code id="code28">ls</code>
+                </div>
+                <br>
+                <p>To change directory:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code29')">Copy code</button>
+                    </div>
+                    <code id="code29">cd directory_name</code>
+                </div>
+                <br>
+                <p>To create a new directory:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code30')">Copy code</button>
+                    </div>
+                    <code id="code30">mkdir directory_name</code>
+                </div>
+                <br>
+                <p>To remove a file:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code31')">Copy code</button>
+                    </div>
+                    <code id="code31">rm filename</code>
+                </div>
+                <br>
+                <p>To remove a directory:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code32')">Copy code</button>
+                    </div>
+                    <code id="code32">rm -r directory_name</code>
+                </div>
+                <br>
+                <h2 id="section-2">Types in Node</h2>
+                <p>In Node, every value has a type, such as string, number, boolean, object, and function. The typeof
+                    operator can be used to determine the type of a value.</p>
+                <p>simply write 'typeof' followed by a value in the terminal and you will get the type in response.</p>
+                <p>Here are some examples of what you can check the type of and the response:</p>
+                <ul>
+                    <li>
+                        <p>> typeof false</p>
+                        <p>'boolean'</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>> typeof 5.5</p>
+                        <p>'number'</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>> typeof function () {}</p>
+                        <p>'function'</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>> typeof "something"</p>
+                        <p>'string'</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>> typeof null</p>
+                        <p>'object'</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>> typeof []</p>
+                        <p>'object'</p>
+                    </li>
+                </ul>
+                <p>Type coercion is when JavaScript automatically converts a value from one type to another. This can
+                    happen implicitly, as in the case of adding a number and a string, or explicitly, using functions
+                    like Number() or String() to convert a value to a different type.</p>
+                <p>For example, the expression 2 + "2" coerces the number 2 into a string and concatenates it with the
+                    string "2", resulting in the string "22". The typeof operator will then return "string" for this
+                    expression.</p>
+                <p>In some cases, coercion can be unpredictable or even produce unexpected results. For instance, [] +
+                    {} returns the string "[object Object]", while {} + [] returns the number 0. This is because the +
+                    operator can mean both addition and concatenation, depending on the types of the operands involved,
+                    and the order in which they are evaluated.</p>
+                <p>It's important to understand how type coercion works in order to avoid bugs and ensure that your code
+                    behaves as expected.</p>
+                <br>
+                <h2 id="section-3">Soft VS Hard Equality</h2>
+                <p>In JavaScript, there are two types of equality operators: the '==' (soft equality) operator and the
+                    '==='
+                    (hard equality) operator. Soft equality will attempt to coerce the two operands to a common type
+                    before comparing them, while hard equality will only return true if the operands are of the same
+                    type and have the same value.</p>
+                <p>Here are some examples to illustrate the difference between soft and hard equality in Node:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code33')">Copy code</button>
+                    </div>
+                    <code id="code33" class="language-js" style="white-space: pre-line; background-color: #fff;">// Soft equality 
+                        console.log(2 == "2"); // true
+                        console.log(true == 1); // true 
+                        console.log(null == undefined); // true 
+                        // Hard equality 
+                        console.log(2 === "2"); // false 
+                        console.log(true === 1); // false 
+                        console.log(null === undefined); // false 
+                    </code>
+                </div>
+                <br>
+                <p>In the first set of examples, the soft equality operator is used to compare two values that are of
+                    different types. The operator coerces the two values to a common type before comparing them,
+                    resulting in 2 == "2" returning true, since both values are considered equivalent when coerced to a
+                    string.</p>
+                <p>In the second set of examples, the hard equality operator is used to compare the same values. Since
+                    the values are of different types, hard equality returns false, since the two values are not
+                    considered equivalent.</p>
+                <p>It's generally recommended to use hard equality over soft equality in most cases, since it avoids
+                    unexpected behavior caused by type coercion. However, there are some cases where soft equality may
+                    be useful or necessary, such as when comparing user input or when checking for null or undefined
+                    values.</p>
+                <br>
+                <h2 id="section-4">Git Commands</h2>
+                <ul>
+                    <li>
+                        <p>Initializes a new Git repository in the current directory.</p>
+                      <p style="font-weight: bold;">> git init</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Creates a copy of a remote repository on your local machine.</p>
+                      <p style="font-weight: bold;">> git clone [repository_url]</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Displays the current state of the repository, including which files are modified and which files are staged.</p>
+                      <p style="font-weight: bold;">> git status</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Adds a file to the staging area, which means it's ready to be committed.</p>
+                      <p style="font-weight: bold;">> git add [file_name]</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Commits the changes in the staging area to the repository, with a message describing the changes.</p>
+                      <p style="font-weight: bold;">> git commit -m "[commit_message]"</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Pushes the committed changes to the remote repository.</p>
+                      <p style="font-weight: bold;">> git push</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Pulls changes from the remote repository and merges them into your local repository.</p>
+                      <p style="font-weight: bold;">> git pull</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Lists all the branches in the repository.</p>
+                      <p style="font-weight: bold;">> git branch</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Switches to a different branch in the repository.</p>
+                      <p style="font-weight: bold;">> git checkout [branch_name]</p>
+                    </li>
+                    <hr>
+                    <li>
+                        <p>Merges the changes in a different branch into the current branch.</p>
+                      <p style="font-weight: bold;">> git merge [branch_name]</p>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+    </div>
+</div>

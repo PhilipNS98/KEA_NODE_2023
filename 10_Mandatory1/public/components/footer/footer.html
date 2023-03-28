@@ -17,6 +17,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
 <script src="/assets/js/copyCode.js"></script>
+<script>
+        fetch('/api/isLoggedIn')
+  .then(response => response.json())
+  .then(res => {
+    const loginLink = document.getElementById('loginLink');
+    if (res.isLoggedIn) {
+      loginLink.innerText = 'Logout';
+      loginLink.href = '/logout';
+      const adminPanelCreated = document.getElementById('adminPanelCreated');
+      const aPLink = document.createElement('a');
+      aPLink.href = "/adminPanel";
+      aPLink.textContent = "Admin Panel";
+      aPLink.classList.add('nav-link');
+      adminPanelCreated.appendChild(aPLink);
+    } else {
+      loginLink.innerText = 'Login';
+      loginLink.href = '/login';
+
+    }
+    
+  });
+</script>
 </body>
 
 </html>

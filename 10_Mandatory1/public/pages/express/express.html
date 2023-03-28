@@ -8,6 +8,7 @@
                         <li><a href="#section-1">Getting Started</a></li>
                         <li><a href="#section-2">Serving Static Files</a></li>
                         <li><a href="#section-3">Custom Template</a></li>
+                        <li><a href="#section-4">SSR vs CSR</a></li>
                     </ul>
                 </div>
             </div>
@@ -84,8 +85,8 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code3')">Copy code</button>
                     </div>
-                    <code id="code3" class="language-js">const express = require('express');
-                        </code>
+                    <code id="code3" class="language-js"
+                        style="white-space: pre-line; background-color: #fff;">const express = require('express');</code>
                 </div>
                 <br>
                 <p>Then you want to instantiate an Express application object by calling the express() function: </p>
@@ -94,8 +95,8 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code4')">Copy code</button>
                     </div>
-                    <code id="code4" class="language-js">const app = express();
-                        </code>
+                    <code id="code4" class="language-js"
+                        style="white-space: pre-line; background-color: #fff;">const app = express();</code>
                 </div>
                 <br>
                 <p>Now you want to define one or more route handlers for your application by calling methods on the app
@@ -105,12 +106,9 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code5')">Copy code</button>
                     </div>
-                    <code id="code5" class="language-js">
-                                app.get('/', (req, res) => {
-                                <br>
-                                &nbsp;&nbsp;res.send('Hello World!');
-                                <br>
-                                &nbsp;}); 
+                    <code id="code5" class="language-js" style="white-space: pre-line; background-color: #fff;">app.get('/', (req, res) => {
+                                res.send('Hello World!');
+                                }); 
                         </code>
                 </div>
                 <br>
@@ -124,15 +122,11 @@
                         <span></span>
                         <button class="copy-button" onclick="copyCode('code6')">Copy code</button>
                     </div>
-                    <code id="code6" class="language-js">
-                            const PORT = 3000;
-                            <br>
-                            &nbsp;app.listen(PORT, () => {
-                            <br>
-                            &nbsp;&nbsp;console.log(`Server listening on port ${PORT}`);
-                              <br>
-                            });                            
-                            </code>
+                    <code id="code6" class="language-js" style="white-space: pre-line; background-color: #fff;">const PORT = 3000;
+                        app.listen(PORT, () => {
+                        console.log(`Server listening on port ${PORT}`);
+                        });                            
+                    </code>
                 </div>
                 <br>
                 <p>This code starts the server on port 3000 and logs a message to the console when the server is ready
@@ -142,11 +136,9 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code6')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code7')">Copy code</button>
                     </div>
-                    <code id="code6">
-                        node app.js                           
-                            </code>
+                    <code id="code7">node app.js</code>
                 </div>
                 <br>
                 <p>This will start the server and your application will be accessible at http://localhost:3000 in your
@@ -160,11 +152,9 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code7')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code8')">Copy code</button>
                     </div>
-                    <code id="code7">
-                                nodemon.cmd app.js                        
-                            </code>
+                    <code id="code8">nodemon.cmd app.js</code>
                 </div>
                 <br>
                 <p>Notice that the command uses nodemon.cmd, that is because it is the windows command for using
@@ -195,11 +185,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code8')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code9')">Copy code</button>
                     </div>
-                    <code id="code8" class="language-js">
-                            app.use(express.static("public"));                      
-                                </code>
+                    <code id="code9" class="language-js"
+                        style="white-space: pre-line; background-color: #fff;">app.use(express.static("public"));</code>
                 </div>
                 <br>
                 <p>This tells Express to look for static files in the "public" folder and serve them as-is.</p>
@@ -208,32 +197,25 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code9')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code10')">Copy code</button>
                     </div>
-                    <code id="code9" class="language-js">
-                                app.get('/', (req, res) => {
-                                    <br>
-                                    &nbsp;&nbsp;res.send('Hello World!');
-                                <br>
-                                &nbsp;}); 
-                        </code>
+                    <code id="code10" class="language-js" style="white-space: pre-line; background-color: #fff;">app.get('/', (req, res) => {
+                        res.send('Hello World!');
+                        }); 
+                    </code>
                 </div>
                 <br>
                 <p>To this: </p>
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code10')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code11')">Copy code</button>
                     </div>
-                    <code id="code10" class="language-js">
-                        app.get("/", (req, res) => {
-                            <br>
-                            &nbsp;&nbsp;const html = fs.readFileSync(__dirname + "/public/index.html");
-                            <br>
-                            &nbsp;&nbsp;res.send(html);
-                            <br>
-                            &nbsp;});                          
-                        </code>
+                    <code id="code11" class="language-js" style="white-space: pre-line; background-color: #fff;">app.get("/", (req, res) => {
+                        const html = fs.readFileSync(__dirname + "/public/index.html");
+                        res.send(html);
+                        });                          
+                    </code>
                 </div>
                 <br>
                 <p>This tells Express to respond to requests to the root URL ("/") by reading the "index.html" file from
@@ -242,11 +224,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code11')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code12')">Copy code</button>
                     </div>
-                    <code id="code11" class="language-js">
-                            const fs = require("fs");                          
-                    </code>
+                    <code id="code12" class="language-js"
+                        style="white-space: pre-line; background-color: #fff;">const fs = require("fs");</code>
                 </div>
                 <br>
                 <p>If you already have your app to listen to a port from the Getting Started guide, you should now start
@@ -324,11 +305,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code12')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code13')">Copy code</button>
                     </div>
-                    <code id="code12" class="language-js">
-                        import fs from "fs";                          
-                    </code>
+                    <code id="code13" class="language-js"
+                        style="white-space: pre-line; background-color: #fff;">import fs from "fs";</code>
                 </div>
                 <br>
                 <p>The next to lines we define two constans, 'components' and 'pageRoot', which hold the root paths for
@@ -345,12 +325,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code13')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code14')">Copy code</button>
                     </div>
-                    <code id="code13" class="language-js">
-                        const components = "public/components/"
-                        <br>
-                        &nbsp;const pagesRoot = "public/pages/"                  
+                    <code id="code14" class="language-js" style="white-space: pre-line; background-color: #fff;">const components = "public/components/"
+                      const pagesRoot = "public/pages/"                  
                     </code>
                 </div>
                 <br>
@@ -367,26 +345,17 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code14')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code15')">Copy code</button>
                     </div>
-                    <code id="code14" class="language-js">
-                        function renderPage(page, config={}) {
-                            <br>
-                            &nbsp;&nbsp;// Components
-                            <br>
-                            &nbsp;&nbsp;const navbar = fs.readFileSync(`${components}navbar/navbar.html`).toString()
-                            <br>
-                            &nbsp;&nbsp;.replace("$TAB_TITLE", config.tabTitle || "Mandatory")
-                            <br>
-                            &nbsp;&nbsp;.replace("$CSS_LINK", config.cssLink || "");
-                            <br>
-                            &nbsp;&nbsp;const footer = fs.readFileSync(`${components}footer/footer.html`).toString()
-                            <br>
-                            &nbsp;&nbsp;.replace("$FOOTER_YEAR", `Copyright © ${new Date().getFullYear()}`)
-                            <br>
-                            <br>
-                            &nbsp;&nbsp;return navbar + page + footer
-                            <br>
+                    <code id="code15" class="language-js" style="white-space: pre-line; background-color: #fff;">function renderPage(page, config={}) {
+                            // Components      
+                            const navbar = fs.readFileSync(`${components}navbar/navbar.html`).toString()
+                            .replace("$TAB_TITLE", config.tabTitle || "Mandatory") 
+                            .replace("$CSS_LINK", config.cssLink || "");      
+                            const footer = fs.readFileSync(`${components}footer/footer.html`).toString()   
+                            .replace("$FOOTER_YEAR", `Copyright © ${new Date().getFullYear()}`)  
+                            
+                            return navbar + page + footer
                         }                    
                     </code>
                 </div>
@@ -400,13 +369,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code15')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code16')">Copy code</button>
                     </div>
-                    <code id="code15" class="language-js">
-                        function readPage(pagePath){
-                            <br>
-                            &nbsp;&nbsp;return fs.readFileSync(pagesRoot + pagePath).toString();
-                            <br>
+                    <code id="code16" class="language-js" style="white-space: pre-line; background-color: #fff;">function readPage(pagePath){
+                            return fs.readFileSync(pagesRoot + pagePath).toString();
                             }      
                     </code>
                 </div>
@@ -416,15 +382,11 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code16')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code17')">Copy code</button>
                     </div>
-                    <code id="code16" class="language-js">
-                        export default {
-                            <br>
-                            &nbsp;&nbsp;renderPage,
-                            <br>
-                            &nbsp;&nbsp;readPage
-                            <br>
+                    <code id="code17" class="language-js" style="white-space: pre-line; background-color: #fff;">export default {
+                        renderPage,         
+                        readPage
                         }  
                     </code>
                 </div>
@@ -449,11 +411,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code17')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code18')">Copy code</button>
                     </div>
-                    <code id="code17" class="language-js">
-                        import templateEngine from "./util/templateEngine.js";
-                    </code>
+                    <code id="code18" class="language-js"
+                        style="white-space: pre-line; background-color: #fff;">import templateEngine from "./util/templateEngine.js";</code>
                 </div>
                 <br>
                 <p>Then we read the page HTML file using templateEngine.readPage and assign it to the constant
@@ -461,11 +422,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code18')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code19')">Copy code</button>
                     </div>
-                    <code id="code18" class="language-js">
-                        const indexpage = templateEngine.readPage(`index/index.html`);
-                    </code>
+                    <code id="code19" class="language-js"
+                        style="white-space: pre-line; background-color: #fff;">const indexpage = templateEngine.readPage(`index/index.html`);</code>
                 </div>
                 <br>
                 <p>Then we render the page, by calling the templateEngine.renderPage() method and assigns it to the
@@ -473,11 +433,10 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code19')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code20')">Copy code</button>
                     </div>
-                    <code id="code19" class="language-js">
-                            const indexFullPage = templateEngine.renderPage(indexpage, { tabTitle: "Mandatory | Express",
-                            link rel="stylesheet" href="/assets/css/indexpage.css"&gt;' });                    
+                    <code id="code20" class="language-js" style="white-space: pre-line; background-color: #fff;">const indexFullPage = templateEngine.renderPage(indexpage, { tabTitle: "Mandatory | Express",
+                            '&lt;link rel="stylesheet" href="/assets/css/indexpage.css"&gt;' });                    
                         </code>
                 </div>
                 <br>
@@ -489,15 +448,12 @@
                 <div class="code-snippet">
                     <div class="code-header">
                         <span></span>
-                        <button class="copy-button" onclick="copyCode('code20')">Copy code</button>
+                        <button class="copy-button" onclick="copyCode('code21')">Copy code</button>
                     </div>
-                    <code id="code20" class="language-js">
-                        app.get('/', (req, res) => {
-                            <br>
-                            &nbsp;&nbsp;res.send(indexFullPage);
-                            <br>
-                          });                                             
-                        </code>
+                    <code id="code21" class="language-js" style="white-space: pre-line; background-color: #fff;">app.get('/', (req, res) => {
+                        res.send(indexFullPage);
+                        });                                             
+                    </code>
                 </div>
                 <br>
                 <p>And that's it! In summary, this code sets up a server using the express module, reads the HTML file
@@ -505,8 +461,57 @@
                     with actual data, and sets up a route for the page using express so that users can view the page
                     when they visit the appropriate URL.</p>
                 <p>Now you can create as many pages as you want using this templateEngine!</p>
-
-
+                <br>
+                <h2 id="section-4">SSR VS CSR</h2>
+                <p>"Server-Side Rendering (SSR) and Client-Side Rendering (CSR) are two approaches used in web
+                    development to render content for the browser. While both approaches have their advantages and
+                    disadvantages, it is important to understand the differences between them to make informed decisions
+                    when building web applications. In this segment, we'll explore the pros and cons of SSR and CSR to
+                    help you decide which approach might be best for your project."</p>
+                <br>
+                <ul>
+                    <li>
+                      <strong>Pros of SSR:</strong>
+                      <ol>
+                        <li>Better initial load time: Since the server renders the initial HTML and sends it to the client, the page can be displayed to the user more quickly, improving the perceived performance.</li>
+                        <li>Improved SEO: Search engines can easily crawl and index server-side rendered pages, since the page content is immediately available in the HTML. This can lead to better search engine rankings.</li>
+                        <li>Improved accessibility: SSR makes it easier to ensure that the page is accessible to all users, regardless of whether they have JavaScript enabled or not.</li>
+                        <li>Better performance on low-powered devices: Since the server does the initial rendering, low-powered devices can display the page more quickly without requiring as much processing power.</li>
+                        <li>Better security: By rendering HTML on the server, it is easier to prevent common client-side vulnerabilities like cross-site scripting (XSS) attacks.</li>
+                      </ol>
+                    </li>
+                    <hr>
+                    <li>
+                      <strong>Cons of SSR:</strong>
+                      <ol>
+                        <li>Slower subsequent load times: SSR requires more round trips to the server to get the initial HTML, which can make subsequent page loads slower compared to a single-page application (SPA) that uses client-side rendering.</li>
+                        <li>More server resources required: Since the server is doing more work in rendering the initial HTML, it may require more resources than a client-side rendered SPA.</li>
+                        <li>More difficult to implement complex UI interactions: Client-side rendering frameworks like React and Vue make it easier to implement complex UI interactions that require frequent updates, since the updates can be done without a round trip to the server.</li>
+                        <li>Limitations on dynamic content: SSR can make it more difficult to render dynamic content that changes frequently or requires frequent updates, since the server has to do more work to render the content.</li>
+                        <li>More difficult to implement and maintain: Implementing SSR requires more complex infrastructure and can be more difficult to maintain compared to a client-side rendered SPA.</li>
+                      </ol>
+                    </li>
+                    <hr>
+                    <li>
+                      <strong>Pros of CSR:</strong>
+                      <ol>
+                        <li>Faster subsequent load times: Since the page is already loaded and the JavaScript is executed on the client-side, subsequent page loads are faster as only the necessary data is requested from the server.</li>
+                        <li>More flexible and interactive UI: Client-side rendering frameworks like React and Vue allow for more dynamic, interactive and complex UIs.</li>
+                        <li>Better support for dynamic content: Client-side rendering allows dynamic content to be updated easily and without requiring a page reload.</li>
+                        <li>Less server load: The server load is reduced as most of the work is done on the client-side.</li>
+                        <li>Easier to maintain: Client-side rendering allows for easier and faster updates, which can make maintenance easier.</li>
+                      </ol>
+                    </li>
+                    <hr>
+                    <li>
+                      <strong>Cons of CSR:</strong>
+                      <ol>
+                        <li>Slower initial load time: As the browser has to download and execute JavaScript before rendering the page, the initial load time can be slower compared to SSR.</li>
+                        <li>SEO challenges: Since the content is generated client-side, search engines may have difficulty crawling and indexing the page, leading to lower search engine rankings.</li>
+                        <li>Security challenges: By rendering HTML on the client-side, client-side vulnerabilities like cross-site scripting (XSS) attacks become more difficult to prevent. </li>
+                        <li>Dependence on JavaScript: Client-side rendering depends on JavaScript being enabled, which can be a problem for users who have it disabled or for accessibility concerns.</li>
+                        <li>Less optimal performance on low-powered devices: Low-powered devices may struggle with the processing demands of client-side rendering, leading to slower page load times.</li>
+                      </ul>
             </div>
         </div>
     </div>

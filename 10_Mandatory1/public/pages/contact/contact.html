@@ -1,17 +1,32 @@
-<h1>Contact</h1>
-<!--Task create a form here-->
-<form action="/api/contact" method="POST">
-    <label>Subject</label>
-    <input type="text" placeholder="subject" name="subject" value="MySubject">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <h1 class="text-center mb-4">Contact Us</h1>
+      <form class="form" action="/api/contact" method="POST">
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" class="form-control" id="subject" placeholder="Enter subject" name="subject" value="">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="">
+        </div>
 
-    <label>Email</label>
-    <input type="email" placeholder="Your Email " name="email" value="test@test.com">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone" value="">
+        </div>
 
-    <label>Phone Number</label>
-    <input type="tel" placeholder="Your Phone" name="phone" value=23232332>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea class="form-control" id="message" rows="5" placeholder="Write your message..."
+            name="message"></textarea>
+        </div>
 
-    <label>Message</label>
-    <textarea cols="40" rows="10" placeholder="Write something..." name="message">lægjielgjgegeligj</textarea>
-
-  <button>Send feedback</button>
-</form>
+        <div class="row justify-content-center">
+          <button type="submit" class="btn btn-primary col-6 mt-5">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
