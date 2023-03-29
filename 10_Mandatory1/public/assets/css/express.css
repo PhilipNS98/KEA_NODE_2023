@@ -47,10 +47,11 @@ code {
     font-family: monospace;
     font-size: 14px;
     line-height: 1.5;
-    background-color: #fff;
+    background-color: #fff !important;
     border-radius: 3px;
-    white-space: pre-line;
+    white-space: pre-line !important;
 }
+
 
 ul {
     list-style-type: none;

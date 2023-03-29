@@ -5,9 +5,8 @@
             <div class="section-selector-container">
                 <div class="section-selector">
                     <ul>
-                        <li><a href="#section-1">Getting Started</a></li>
-                        <li><a href="#section-2">Serving Static Files</a></li>
-                        <li><a href="#section-3">Custom Template</a></li>
+                        <li><a href="#section-1">REST API Conventions</a></li>
+                        <li><a href="#section-2">CRUDable REST API</a></li>
                     </ul>
                 </div>
             </div>
@@ -15,7 +14,158 @@
         <div class="col-md-9">
             <!-- Main Content -->
             <div class="content">
-                documentation here ...
+                <h1 id="section-1"> REST API Conventions</h1>
+                <p>REST API conventions are a set of guidelines and best practices that define how RESTful APIs should
+                    be designed to ensure consistency, readability, and usability. Following these conventions can
+                    improve the performance, maintainability, and scalability of the APIs. Some of the important REST
+                    API conventions are:</p>
+                <ol>
+                    <li>Use Nouns for Resource Names: REST APIs should use nouns for resource names, and not verbs. For
+                        example, instead of using "createUser" or "getUserInfo", the APIs should use "users" as the
+                        resource name.</li>
+                    <li>Use HTTP Verbs for CRUD Operations: REST APIs should use HTTP verbs to perform CRUD (Create,
+                        Read, Update, Delete) operations on resources. The commonly used HTTP verbs are GET (for
+                        reading), POST (for creating), PUT (for updating), and DELETE (for deleting).</li>
+                    <li>Use Plural Nouns for Collections: REST APIs should use plural nouns for collections of
+                        resources. For example, instead of using "user", the APIs should use "users" as the collection
+                        name.</li>
+                    <li>Use Query Parameters for Filtering: REST APIs should use query parameters for filtering
+                        resources. For example, to filter users by name, the API should use the query parameter "name"
+                        as "/users?name=John".</li>
+                    <li>Use HTTP Status Codes: REST APIs should use appropriate HTTP status codes to indicate the status
+                        of the response. For example, 200 for OK, 201 for Created, 400 for Bad Request, 401 for
+                        Unauthorized, and 404 for Not Found.</li>
+                    <li>Use HATEOAS: REST APIs should use HATEOAS (Hypermedia As The Engine Of Application State) to
+                        enable clients to navigate the API by following links in the response.</li>
+                    <li>Use Versioning: REST APIs should use versioning to maintain backwards compatibility. Versioning
+                        can be done using URL, query parameters, headers, or content negotiation.</li>
+                </ol>
+                <br>
+                <p>By following these conventions, RESTful APIs can become more consistent, readable, and usable.</p>
+                <br>
+                <h1 id="section-2">CRUDable REST API</h1>
+                <p>CRUD stands for Create, Read, Update, and Delete, which are the basic operations that can be
+                    performed on data. A CRUDable API is a web API that allows clients to perform these operations on
+                    resources, typically stored in a database.</p>
+                <p>A typical CRUDable API will have endpoints that correspond to each of the CRUD operations. These
+                    endpoints are defined using the HTTP methods GET, POST, PUT, PATCH, and DELETE, which correspond to
+                    read, create, update, partial update, and delete, respectively.</p>
+                <p>Here are some code snippets that demonstrate the implementation of different CRUD operations using
+                    Express.js:</p>
+                <p>To read all birds:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code63')">Copy code</button>
+                    </div>
+                    <code id="code63" class="language-js">app.get("/birds", (req, res) => {
+                            res.send({ data: birds })
+                        })                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                    </code>
+                </div>
+                <br>
+                <p>To read a specific bird using its ID:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code64')">Copy code</button>
+                    </div>
+                    <code id="code64" class="language-js">app.get('/birds/:id', (req, res) => {
+                        const birdId = Number(req.params.id);
+                        const bird = birds.find((bird) => bird.id === birdId);
+                    
+                        if (bird) {
+                            res.send({ data: bird });
+                        } else {
+                            res.status(404).send('Bird not found');
+                        }
+                    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                    </code>
+                </div>
+                <br>
+                <p>To create a new bird:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code65')">Copy code</button>
+                    </div>
+                    <code id="code65" class="language-js">app.post('/birds/', (req, res) => {
+                        const bird = req.body;
+                        bird.id = ++currentId;
+                        birds.push(bird);
+                        res.send({ data: bird });
+                    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    </code>
+                </div>
+                <br>
+                <p>To update all birds:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code66')">Copy code</button>
+                    </div>
+                    <code id="code66" class="language-js">app.put('/birds', (req, res) => {
+                        const updatedBirds = req.body;
+                        const validationResult = validateBirds(birds, updatedBirds);
+                    
+                        if (validationResult !== 'success') {
+                            return res.status(400).send(validationResult);
+                        }
+                    
+                        birds.splice(0, birds.length, ...updatedBirds);
+                    
+                        res.status(200).send(`Birds updated successfully`);
+                    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    </code>
+                </div>
+                <br>
+                <p>Note that this implementation calls a function validateBirds to update all nested properties aswell.
+                </p>
+                <br>
+                <p>To update a specific bird using its ID:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code67')">Copy code</button>
+                    </div>
+                    <code id="code67" class="language-js">app.patch("/birds/:id", (req, res) => {
+                        const foundBirdIndex = birds.findIndex(bird => bird.id === Number(req.params.id));
+                        
+                        if (foundBirdIndex === -1) {
+                            res.status(404).send({ message: `No bird with id: ${req.params.id}`});
+                        } else {
+                            const foundBird = birds[foundBirdIndex];
+                            const updatedBird = { ...foundBird, ...req.body };
+                            birds[foundBirdIndex] = updatedBird;
+                            res.send({ data: updatedBird });
+                        }
+                    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    </code>
+                </div>
+                <br>
+                <p>To delete a specific bird using its ID:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code68')">Copy code</button>
+                    </div>
+                    <code id="code68" class="language-js">app.delete('/birds/:id', (req, res) => {
+                        const birdId = Number(req.params.id);
+                        const birdIndex = birds.findIndex(bird => bird.id === birdId);
+                    
+                        if (birdIndex === -1) {
+                            res.status(404).send('Bird not found');
+                        } else {
+                            birds.splice(birdIndex, 1);
+                            res.send('Bird deleted successfully');
+                        }
+                    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                    </code>
+                </div>
+                <br>
+                <p>Note that these code snippets are just examples and should be adapted to the specific requirements of
+                    your API. Additionally, you should always implement appropriate security measures to protect your
+                    API and its data.</p>
             </div>
         </div>
     </div>

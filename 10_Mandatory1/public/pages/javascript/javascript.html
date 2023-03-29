@@ -5,9 +5,12 @@
             <div class="section-selector-container">
                 <div class="section-selector">
                     <ul>
-                        <li><a href="#section-1">Getting Started</a></li>
-                        <li><a href="#section-2">Serving Static Files</a></li>
-                        <li><a href="#section-3">Custom Template</a></li>
+                        <li><a href="#section-1">Variables</a></li>
+                        <li><a href="#section-2">Loop Methods in JavaScript</a></li>
+                        <li><a href="#section-3">Common Array and String Methods in JavaScript</a></li>
+                        <li><a href="#section-4">Function Types</a></li>
+                        <li><a href="#section-5">Cross-Site Scripting (XSS)</a></li>
+                        <li><a href="#section-6">Type: Module in package.json</a></li>
                     </ul>
                 </div>
             </div>
@@ -15,7 +18,694 @@
         <div class="col-md-9">
             <!-- Main Content -->
             <div class="content">
-                documentation here ...
+                <h1 id="section-1">JavaScript Variables</h1>
+                <p>In JavaScript, variables are used to store data values that can be accessed and manipulated
+                    throughout the program. There are a few rules to keep in mind when working with variables:</p>
+                <p>When declaring a variable using const or let, you must assign a value to it immediately:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code34')">Copy code</button>
+                    </div>
+                    <code id="code34" class="language-js">const me = {
+                        name: "Philip"
+                      };
+                      
+                      const hobbies = ["Football", "Swimming"];
+                      hobbies.push("Cooking");
+                      
+                      me.hobbies = hobbies;
+                      me.name = "Johannes";      
+                    </code>
+                </div>
+                <br>
+                <p>Once a value is assigned to a variable using const, it cannot be reassigned:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code35')">Copy code</button>
+                    </div>
+                    <code id="code35" class="language-js">// This will throw an error: "TypeError: Assignment to constant variable."
+                        // me = {};                        
+                    </code>
+                </div>
+                <br>
+                <p>Here is a table of variables and their difinition: </p>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Variable</th>
+                                <th scope="col">Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>let</td>
+                                <td>A keyword used to declare a block-scoped variable that can be reassigned.</td>
+                            </tr>
+                            <tr>
+                                <td>const</td>
+                                <td>A keyword used to declare a block-scoped variable that cannot be reassigned.</td>
+                            </tr>
+                            <tr>
+                                <td>var</td>
+                                <td>A keyword used to declare a function-scoped variable that can be reassigned.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <h3>Quotes</h3>
+                <p>When working with strings, you can use either single or double quotes to enclose the string. To avoid
+                    having to use escape sequences, it's best to use the opposite quote inside the string. If you need
+                    to use both types of quotes, you can use backticks to enclose the string and then use the other
+                    quotes inside:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code36')">Copy code</button>
+                    </div>
+                    <code id="code36" class="language-js">const hobbyOne = "Football skill level: '6'";
+                            const hobbyTwo = 'Swimming skill level: "3"';
+                            const hobbyThree = `Cooking skill level: "'${2 + 2}'"`;
+                            
+                            console.log(hobbyThree);
+                            // Output: "Cooking skill level: '4'"                            
+                        </code>
+                </div>
+                <br>
+                <h3>Variable Scope</h3>
+                <p>In JavaScript, variables can be declared with either var, let, or const. Using var can lead to
+                    unintended consequences, such as variable hoisting and variable scope issues. It's recommended to
+                    use let or const instead. If you need to declare a global variable, it's best to explicitly define
+                    it using the window object.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code37')">Copy code</button>
+                    </div>
+                    <code id="code37" class="language-js">"use strict";
+
+                            // This will throw a reference error since the variable is not defined.
+                            // totalGlobalVariable = "Never ever do this";
+                            
+                            // Avoid using var for variable declaration.
+                            // var globalVariable = "Also never do this";
+                            
+                            // Use let or const instead.
+                            {
+                              let someValue = true;
+                              {
+                                let someValue = false;
+                              }
+                              console.log(someValue); // Output: true
+                            }
+                            
+                            // To explicitly declare a global variable, use the window object.
+                            // window.globalVariable = "This is a global variable";                                                      
+                            </code>
+                </div>
+                <br>
+                <h3>Iteration with setTimeout</h3>
+                <p>When using a loop with setTimeout, it's important to use let instead of var to avoid scope issues:
+                </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code38')">Copy code</button>
+                    </div>
+                    <code id="code38" class="language-js">// This will output the same value (6) six times.
+                        for (var i = 0; i &lt;= 5; i++) {
+                          setTimeout(() => {
+                            console.log(i);
+                          }, 1000);
+                        }
+                        
+                        // This will output a value between 0-5 each time.
+                        for (let i = 0; i &lt;= 5; i++) {
+                          setTimeout(() => {
+                            console.log(i);
+                          }, 1000);
+                        }
+                        </code>
+                </div>
+                <br>
+                <br>
+                <h1 id="section-2">Loop Methods in JavaScript</h1>
+                <p>Loop methods are higher-order functions in JavaScript that can help simplify and streamline the
+                    process of iterating through arrays. Rather than writing traditional loops, which can often be
+                    verbose and cumbersome, loop methods provide a more concise syntax for performing common operations
+                    on arrays.</p>
+                <p>Some common loop methods in JavaScript include:</p>
+                <br>
+                <h3>'map'</h3>
+                <p>'map()' method creates a new array with the results of calling a provided function on every element
+                    in the calling array.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code39')">Copy code</button>
+                    </div>
+                    <code id="code39" class="language-js">const arr = [1, 2, 3, 4, 5];
+
+                            const mappedArr = arr.map((num) => num * 2);
+                            
+                            console.log(mappedArr); // Output: [2, 4, 6, 8, 10]                            
+                            </code>
+                </div>
+                <br>
+                <h3>'filter'</h3>
+                <p>'filter()' method creates a new array with all elements that pass the test implemented by the
+                    provided
+                    function.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code40')">Copy code</button>
+                    </div>
+                    <code id="code40" class="language-js">const arr = [1, 2, 3, 4, 5];
+
+                        const filteredArr = arr.filter((num) => num > 3);
+                        
+                        console.log(filteredArr); // Output: [4, 5]                                                   
+                    </code>
+                </div>
+                <br>
+                <h3>'find'</h3>
+                <p>'find()' method returns the value of the first element in the array that satisfies the provided
+                    testing
+                    function.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code41')">Copy code</button>
+                    </div>
+                    <code id="code41" class="language-js">const arr = [1, 2, 3, 4, 5];
+
+                        const found = arr.find((num) => num > 3);
+                        
+                        console.log(found); // Output: 4                                                                        
+                        </code>
+                </div>
+                <br>
+                <h3>'reduce'</h3>
+                <p>'reduce()' method executes a reducer function on each element of the array, resulting in a single
+                    output value.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code42')">Copy code</button>
+                    </div>
+                    <code id="code42" class="language-js">const arr = [1, 2, 3, 4, 5];
+
+                            const reduced = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+                            
+                            console.log(reduced); // Output: 15                                                                                                  
+                            </code>
+                </div>
+                <br>
+                <h3>'sort'</h3>
+                <p>'sort()' method sorts the elements of an array in place and returns the sorted array.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code43')">Copy code</button>
+                    </div>
+                    <code id="code43" class="language-js">const arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+
+                        const sortedArr = arr.sort();
+                        
+                        console.log(sortedArr); // Output: [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]                                                                                                                        
+                            </code>
+                </div>
+                <br>
+                <h3>'forEach'</h3>
+                <p>'forEach()' method executes a provided function once for each array element</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code44')">Copy code</button>
+                    </div>
+                    <code id="code44" class="language-js">const arr = [1, 2, 3, 4, 5];
+
+                        arr.forEach((num) => {
+                          console.log(num * 2);
+                        });
+                        
+                        // Output:
+                        // 2
+                        // 4
+                        // 6
+                        // 8
+                        // 10                                                                                                                                               
+                            </code>
+                </div>
+                <br>
+                <p>Using loop methods can help make your code more readable, maintainable, and performant, as they often
+                    allow you to accomplish the same tasks with fewer lines of code. However, it's important to note
+                    that loop methods are not always the best solution for every situation, and there may be cases where
+                    traditional loops or other approaches are more appropriate.</p>
+                <br>
+                <h1 id="section-3">Common Array and String Methods in JavaScript</h1>
+                <p>In JavaScript, arrays and strings are two of the most commonly used data types. There are a variety
+                    of methods available to manipulate and work with these data types. In this topic, we'll explore some
+                    of the most common methods available for arrays and strings in JavaScript.</p>
+                <h3>toFixed</h3>
+                <p>The 'toFixed()' method is used to format a number with a specific number of digits after the decimal
+                    point.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code45')">Copy code</button>
+                    </div>
+                    <code id="code45" class="language-js">let num = 12.345;
+                            console.log(num.toFixed(2)); // Output: "12.35"                                                                                                                                                        
+                                </code>
+                </div>
+                <br>
+                <h3>charAt()</h3>
+                <p>The 'charAt()' method returns the character at a specified index in a string.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code46')">Copy code</button>
+                    </div>
+                    <code id="code46" class="language-js">let str = "Hello World!";
+                        console.log(str.charAt(6)); // Output: "W"                                                                                                                                                                               
+                                </code>
+                </div>
+                <br>
+                <h3>replace()</h3>
+                <p>The 'replace()' method is used to replace a specified value with another value in a string.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code47')">Copy code</button>
+                    </div>
+                    <code id="code47" class="language-js">let str = "Hello World!";
+                        console.log(str.replace("World", "Universe")); // Output: "Hello Universe!"                                                                                                                                                                                                      
+                                </code>
+                </div>
+                <br>
+                <h3>push()</h3>
+                <p>The 'push()' method is used to add one or more elements to the end of an array and returns the new
+                    length of the array.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code48')">Copy code</button>
+                    </div>
+                    <code id="code48" class="language-js">let arr = [1, 2, 3];
+                        arr.push(4);
+                        console.log(arr); // Output: [1, 2, 3, 4]                                                                                                                                                                                                                        
+                                </code>
+                </div>
+                <br>
+                <h3>splice()</h3>
+                <p>The 'splice()' method is used to add or remove elements from an array at a specified index.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code49')">Copy code</button>
+                    </div>
+                    <code id="code49" class="language-js">let arr = [1, 2, 3];
+                        arr.splice(1, 0, 4);
+                        console.log(arr); // Output: [1, 4, 2, 3]                                                                                                                                                                                                                                               
+                                </code>
+                </div>
+                <br>
+                <h3>pop()</h3>
+                <p>The 'pop()' method is used to remove the last element from an array and returns that element.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code50')">Copy code</button>
+                    </div>
+                    <code id="code50" class="language-js">let arr = [1, 2, 3];
+                        let lastElement = arr.pop();
+                        console.log(lastElement); // Output: 3
+                        console.log(arr); // Output: [1, 2]                                                                                                                                                                                                                                                                   
+                                </code>
+                </div>
+                <br>
+                <h3>concat()</h3>
+                <p>The 'concat()' method is used to merge two or more arrays and returns a new array.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code51')">Copy code</button>
+                    </div>
+                    <code id="code51" class="language-js">let arr1 = [1, 2, 3];
+                        let arr2 = [4, 5, 6];
+                        let newArr = arr1.concat(arr2);
+                        console.log(newArr); // Output: [1, 2, 3, 4, 5, 6]                                                                                                                                                                                                                                                                                      
+                                </code>
+                </div>
+                <br>
+                <h3>slice()</h3>
+                <p>The 'slice()' method is used to extract a section of an array or string and returns a new array or
+                    string.
+                </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code52')">Copy code</button>
+                    </div>
+                    <code id="code52" class="language-js">let arr = [1, 2, 3, 4, 5];
+                        let slicedArr = arr.slice(2, 4);
+                        console.log(slicedArr); // Output: [3, 4]
+                        
+                        let str = "Hello World!";
+                        let slicedStr = str.slice(0, 5);
+                        console.log(slicedStr); // Output: "Hello"                                                                                                                                                                                                                                                                                                             
+                                </code>
+                </div>
+                <br>
+                <p>These are just a few of the most commonly used methods for arrays and strings in JavaScript. There
+                    are many more available that can help you manipulate and work with these data types.</p>
+                <br>
+                <h1 id="section-4">Function Types</h1>
+                <p>Functions are a crucial part of JavaScript and allow developers to write reusable code. There are
+                    different types of functions that can be used in JavaScript depending on the requirements of the
+                    application. In this section, we will discuss and demonstrate how to create and use different types
+                    of functions in JavaScript, including normal functions, anonymous functions, arrow functions, lambda
+                    functions, and callback functions.</p>
+                <h3>Normal Functions:</h3>
+                <p>A normal function is created using the function keyword followed by the function name, parameter(s),
+                    and function body enclosed in curly braces. Normal functions can be defined with a function name or
+                    assigned to a variable. They can be invoked using the function name or the variable name if the
+                    function is assigned to a variable.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code53')">Copy code</button>
+                    </div>
+                    <code id="code53" class="language-js">function sum(a, b) {
+                            return a + b;
+                          }
+                          console.log(sum(2, 3)); // Output: 5
+                          
+                          // Assigned to variable
+                          const diff = function(a, b) {
+                            return a - b;
+                          }
+                          console.log(diff(5, 2)); // Output: 3                                                                                                                                                                                                                                                                                                                                       
+                                    </code>
+                </div>
+                <br>
+                <h3>Anonymous Functions:</h3>
+                <p>Anonymous functions are functions that are defined without a name. They are commonly used as function
+                    expressions that are assigned to a variable or passed as an argument to another function. Anonymous
+                    functions can be invoked using the variable name that holds the function expression.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code54')">Copy code</button>
+                    </div>
+                    <code id="code54" class="language-js">const multiply = function(a, b) {
+                            return a * b;
+                          }
+                          console.log(multiply(2, 3)); // Output: 6                                                                                                                                                                                                                                                                                                                                                        
+                                        </code>
+                </div>
+                <br>
+                <h3>Arrow Functions:</h3>
+                <p>Arrow functions were introduced in ES6 as a shorthand for writing function expressions. They are
+                    defined using the '=>' symbol after the parameter list and can have an implicit or explicit return
+                    value. Arrow functions are often used in functional programming and provide a more concise way of
+                    writing functions.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code55')">Copy code</button>
+                    </div>
+                    <code id="code55" class="language-js">const divide = (a, b) => {
+                        return a / b;
+                      }
+                      console.log(divide(6, 3)); // Output: 2
+                      
+                      // Implicit return
+                      const multiplyByTwo = num => num * 2;
+                      console.log(multiplyByTwo(5)); // Output: 10                                                                                                                                                                                                                                                                                                                                                                           
+                                        </code>
+                </div>
+                <br>
+                <h3>Lambda Functions:</h3>
+                <p>Lambda functions are similar to arrow functions but have a slightly different syntax. They are also
+                    known
+                    as lambda expressions and can be defined with or without parameters.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code56')">Copy code</button>
+                    </div>
+                    <code id="code56" class="language-js">const square = x => x * x;
+                        console.log(square(3)); // Output: 9
+                        
+                        const message = () => console.log("Hello World!");
+                        message(); // Output: Hello World!                                                                                                                                                                                                                                                                                                                                                                                                   
+                                            </code>
+                </div>
+                <br>
+                <h3>Callback Functions:</h3>
+                <p>A callback function is a function that is passed as an argument to another function and executed
+                    after the completion of the parent function. Callback functions are commonly used in event handling,
+                    asynchronous programming, and functional programming.</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code57')">Copy code</button>
+                    </div>
+                    <code id="code57" class="language-js">function greeting(name) {
+                            console.log(`Hello ${name}!`);
+                          }
+                          
+                          function processUserInput(callback) {
+                            const name = prompt("Please enter your name: ");
+                            callback(name);
+                          }
+                          
+                          processUserInput(greeting); // Output: Hello (name)!                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                </code>
+                </div>
+                <br>
+                <p>All in all, functions are a powerful tool in JavaScript and can be used to make code more modular,
+                    reusable, and efficient.</p>
+                <br>
+                <h1 id="section-5">Cross-Site Scripting (XSS)</h1>
+                <p>Cross-site scripting (XSS) is a type of security vulnerability found in web applications. It allows
+                    attackers to inject malicious code (usually in the form of a script) into a legitimate website that
+                    other users then execute. This can lead to the theft of sensitive data such as cookies, session
+                    tokens, or other private information. In this topic, we will discuss the different types of XSS
+                    attacks and how to prevent them.</p>
+                <br>
+                <h3>Types of XSS Attacks:</h3>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Reflected XSS:</td>
+                                <td>Reflected XSS occurs when an attacker sends a link containing a malicious script to
+                                    a victim. When the victim clicks on the link, the script executes in the victim's
+                                    browser, giving the attacker access to sensitive data. Reflected XSS can be
+                                    prevented by sanitizing user input and properly validating all user-generated
+                                    content.</td>
+                            </tr>
+                            <tr>
+                                <td>Stored XSS:</td>
+                                <td>Stored XSS is a type of XSS attack where the malicious script is stored on the
+                                    server, waiting for the victim to access the affected web page. This type of attack
+                                    can be particularly dangerous because the script can affect multiple users. Stored
+                                    XSS can be prevented by validating all user input and using proper encoding
+                                    techniques.</td>
+                            </tr>
+                            <tr>
+                                <td>DOM-Based XSS:</td>
+                                <td>DOM-based XSS occurs when the script is embedded in the DOM of the affected web
+                                    page. This can happen when user input is not properly sanitized before being added
+                                    to the DOM. DOM-based XSS can be prevented by sanitizing all user input and properly
+                                    validating all user-generated content.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <h3>Prevention Techniques:</h3>
+                <ol>
+                    <li>Sanitize User Input: All user input should be sanitized to remove any special characters or
+                        scripts that could be used in an attack.</li>
+                    <li>Validate User-Generated Content: All user-generated content should be validated to ensure that
+                        it contains only safe and expected content.</li>
+                    <li>Use Proper Encoding Techniques: All user-generated content should be properly encoded to prevent
+                        XSS attacks.</li>
+                    <li>Use Content Security Policy (CSP): CSP is a security feature that allows web developers to
+                        specify which content can be loaded on their web pages. It can be used to prevent XSS attacks by
+                        only allowing trusted sources to be loaded.</li>
+                    <li>Use HttpOnly Cookies: HttpOnly cookies prevent malicious scripts from accessing session cookies,
+                        which can be used to steal sensitive information.</li>
+                </ol>
+                <br>
+                <p>Here is an example of a vulnerable code snippet that could be used in an XSS attack:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code58')">Copy code</button>
+                    </div>
+                    <code id="code58" class="language-js">var name = document.getElementById("name").value;
+                        document.write("Welcome, " + name + "!");                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                </code>
+                </div>
+                <br>
+                <p>This code snippet is vulnerable because it uses user input without properly sanitizing it. An
+                    attacker could inject a script into the name field that would execute in the victim's browser when
+                    the code is executed.</p>
+                <p>To prevent XSS attacks, we could sanitize the input before using it:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code59')">Copy code</button>
+                    </div>
+                    <code id="code59" class="language-js">var name = document.getElementById("name").value;
+                        name = name.replace( /&lt;/g, "&lt;").replace(/&gt;/g, "&gt;");
+                        document.write("Welcome, " + name + "!");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                    </code>
+                </div>
+                <br>
+                <p>This code snippet uses regular expressions to replace any angle brackets in the input with their HTML
+                    entities, preventing any scripts from being executed.</p>
+
+                <p>Another way that attackers can exploit XSS vulnerabilities is by injecting malicious code into a
+                    website's HTML, such as by changing the innerHTML or innerText of an element.</p>
+                <p>For example, let's say that our website has a feature where users can submit comments. We might have
+                    a form where users can enter their comment text, and then we use JavaScript to add their comment to
+                    the page dynamically, like this:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code60')">Copy code</button>
+                    </div>
+                    <code id="code60" class="language-js">&lt;div id="comments"&gt;
+                            &lt;!-- existing comments here --&gt;
+                          &lt;/div&gt;
+                        
+                          &lt;form&gt;
+                            &lt;label for="comment"&gt;Leave a comment:&lt;/label&gt;&lt;br&gt;
+                            &lt;textarea id="comment" name="comment"&gt;&lt;/textarea&gt;&lt;br&gt;
+                            &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                          &lt;/form&gt;
+                        
+                          &lt;script&gt;
+                            const form = document.querySelector('form');
+                            const comments = document.querySelector('#comments');
+                        
+                            form.addEventListener('submit', event =&gt; {
+                              event.preventDefault();
+                        
+                              const commentText = document.querySelector('#comment').value;
+                        
+                              // add the comment to the page
+                              const newComment = document.createElement('div');
+                              newComment.innerHTML = commentText;
+                              comments.appendChild(newComment);
+                            });
+                          &lt;/script&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                        </code>
+                </div>
+                <br>
+                <p>However, an attacker could take advantage of the fact that we're using 'innerHTML' to inject their
+                    own
+                    malicious code into our page. For example, they could submit a comment like this:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code61')">Copy code</button>
+                    </div>
+                    <code id="code61" class="language-js">&lt;script&gt;
+                            alert('This site has been hacked!');
+                          &lt;/script&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                        </code>
+                </div>
+                <br>
+                <p>When our JavaScript code adds this comment to the page using 'innerHTML', the attacker's code will be
+                    executed in the user's browser, displaying the alert message and potentially doing even worse
+                    things, like stealing user data or hijacking their session.</p>
+                <p>To avoid this type of attack, we should use 'innerText' instead of 'innerHTML' whenever we're
+                    inserting
+                    untrusted content into our page. This will ensure that any HTML tags are properly escaped and
+                    treated as text, preventing them from being executed as code.</p>
+                <p>So, we can modify our code above to use 'innerText' instead of 'innerHTML' like this:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code62')">Copy code</button>
+                    </div>
+                    <code id="code62" class="language-js">&lt;div id="comments"&gt;
+                                &lt;!-- existing comments here --&gt;
+                              &lt;/div&gt;
+                            
+                              &lt;form&gt;
+                                &lt;label for="comment"&gt;Leave a comment:&lt;/label&gt;&lt;br&gt;
+                                &lt;textarea id="comment" name="comment"&gt;&lt;/textarea&gt;&lt;br&gt;
+                                &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                              &lt;/form&gt;
+                            
+                              &lt;script&gt;
+                                const form = document.querySelector('form');
+                                const comments = document.querySelector('#comments');
+                            
+                                form.addEventListener('submit', event =&gt; {
+                                  event.preventDefault();
+                            
+                                  const commentText = document.querySelector('#comment').value;
+                            
+                                  // add the comment to the page using innerText
+                                  const newComment = document.createElement('div');
+                                  newComment.innerText = commentText;
+                                  comments.appendChild(newComment);
+                                });
+                              &lt;/script&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                            </code>
+                </div>
+                <br>
+                <p>Now, if an attacker tries to submit a comment with malicious code, it will be treated as text and
+                    displayed as such, preventing any code injection attacks.</p>
+                <br>
+                <h1 id="section-6">Type: Module in package.json</h1>
+                <p>In Node.js, modules can be imported using either the require() function or the import statement. The
+                    require() function uses the CommonJS module system, which is the default in Node.js. On the other
+                    hand, the import statement uses the ECMAScript module system, which was introduced in ES6.</p>
+                <p>Setting "type": "module" in package.json tells Node.js to use the ECMAScript module system for your
+                    project. This means that you can use the import statement to import modules instead of require().
+                </p>
+                <p>For example, with "type": "module" in package.json, you can import an external module like this:</p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code69')">Copy code</button>
+                    </div>
+                    <code id="code69" class="language-js">import express from 'express';</code>
+                </div>
+                <br>
+                <p>Without "type": "module", you would have to import the module like this:
+                </p>
+                <div class="code-snippet">
+                    <div class="code-header">
+                        <span></span>
+                        <button class="copy-button" onclick="copyCode('code70')">Copy code</button>
+                    </div>
+                    <code id="code70" class="language-js">const express = require('express');</code>
+                </div>
+                <br>
+                <p>Note that using the import statement requires the use of file extensions when importing local files.
+                    For example, you would need to use "./module.js" instead of "./module" when importing a local module
+                    with import.</p>
             </div>
         </div>
     </div>
