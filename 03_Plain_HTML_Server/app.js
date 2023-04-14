@@ -1,9 +1,10 @@
-const express = require("express");
+//const express = require("express");
+import express from "express";
 const app = express();
 const path = require("path");
 
-const https = require('https');
-
+//const https = require('https');
+import https from "https";
 
 // Tells the Express server to serve static files from the "public" directory.
 app.use(express.static(path.join(__dirname, "public")));
@@ -71,6 +72,18 @@ If there's an error during the request, it is logged to the console and an error
 
 //API
 
+// task create three routers called tanksRouter.js, visitorsRouter.js and guardRouter.js
+// task and move the routes below into the files.
+
+import tanksRouter from "./routers/tanksRouter.js";
+app.use(tanksRouter);
+
+import visitorsRouter from "./routers/visitorsRouter.js";
+app.use(visitorsRouter);
+
+import guardRouter from "./routers/guardRouter.js";
+app.use(guardRouter);
+
 //GET COUNTDOWN
 app.get('/countdown', (req, res) => {
     const { targetDate } = req.query;
@@ -88,29 +101,13 @@ app.get('/countdown', (req, res) => {
     res.send({ data: countdown });
 });
 
-//GET tanks
-app.get("/api/tanks", (req, res) => {
-    res.send({ data: tanks });
-})
 
-//GET visitor count
-app.get("/api/visitors", (req, res) => {
-    res.send({ data: visitorCount });
-})
 
-//PUT increment visitor count
-app.put("/api/visitors", (req, res) => {
-    res.send({ data: ++visitorCount });
-})
 
-//Server side redirection
-app.get("/api/guards", (req, res) => {
-    if (req.query.passport === "theskyisblue") {
-       return res.redirect("/api/tanks");
-    } 
-        res.send({ message: "You are not allowed to see the tanks. Give us the secret in the query string  with the key being passport" })
-    
-});
+
+
+
+
 //POST
 
 //PUT
