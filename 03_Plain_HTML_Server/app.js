@@ -1,39 +1,32 @@
 //const express = require("express");
 import express from "express";
 const app = express();
-const path = require("path");
+import path from "path";
+// const path = require("path");
 
 //const https = require('https');
 import https from "https";
 
 // Tells the Express server to serve static files from the "public" directory.
-app.use(express.static(path.join(__dirname, "public")));
-
-const tanks = [
-    { name: "Leopard", nationality: "Germany" },
-    { name: "Tiger", nationality: "Germany", year: "1943" },
-    { name: "M1 Abrams", version: "M1" }
-];
-
-let visitorCount = 0;
+app.use(express.static("public"));
 
 // PAGES    
 
 //GET ALL FRONTAPGE
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public/frontpage/frontpage.html"));
+    res.sendFile(path.resolve("public/frontpage/frontpage.html"));
 });
 // GET ALL TANKS
 app.get("/tanks", (req, res) => {
-    res.sendFile(__dirname + "/public/tanks/tanks.html")
+    res.sendFile(path.resolve("public/tanks/tanks.html"))
 })
 
 app.get("/visitors", (req, res) => {
-    res.sendFile(__dirname + "/public/visitors/visitors.html")
+    res.sendFile(path.resolve("public/visitors/visitors.html"))
 })
 
 app.get("/museumGuards", (req, res) => {
-    res.sendFile(__dirname + "/public/museumGuards/museumGuards.html");
+    res.sendFile(path.resolve("public/museumGuards/museumGuards.html"));
 })
 //proxy server
 // ANOTHER WAY TO PROXY SERVE GOOGLE.COM!
