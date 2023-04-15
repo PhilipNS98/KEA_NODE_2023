@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "escape-html": "^1.0.3",
-    "sentiment": "^5.0.2"
+    "sentiment": "^5.0.2",
+    "svelte-routing": "^1.6.0"
   }
 }
