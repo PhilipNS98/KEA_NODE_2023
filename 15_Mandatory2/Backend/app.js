@@ -1,10 +1,12 @@
-import { dotenv } from "dotenv/config";
+import dotenv  from "dotenv/config";
 
-import { express } from "express";
+import express from "express";
 const app = express();
 
 import helmet from "helmet";
 app.use(helmet());
+
+app.use(express.json());
 
 import cors from "cors";
 app.use(cors({
@@ -34,7 +36,7 @@ app.use(apiLimiter);
 // specific rate limitter that applies to a specific route (more restrictive)
 app.use("/auth", rateLimit({
     windowMs: 15 * 60 * 1000, 
-    max: 4, 
+    max: 100, 
     standardHeaders: true, 
     legacyHeaders: false, 
 }));
@@ -42,6 +44,8 @@ app.use("/auth", rateLimit({
 import authRouter from "./routers/authRouter.js"
 app.use("/auth", authRouter);
 
+import mailer from "./routers/mailer.js"
+app.use(mailer);
 
 
 

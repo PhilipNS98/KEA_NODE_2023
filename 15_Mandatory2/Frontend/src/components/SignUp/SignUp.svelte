@@ -1,46 +1,64 @@
 <script>
     // @ts-nocheck
+    import { BASE_AUTH_URL } from "../../store/globalsStore.js";
     // import { navigate } from "svelte-routing";
-    import { BASE_AUTH_URL, SESSION } from "../../store/globalsStore";
-    import { useNavigate, useLocation } from "svelte-navigator";
-    import Cookies from "js-cookie";
+    import {
+        toasts,
+        ToastContainer,
+        FlatToast,
+        BootstrapToast,
+    } from "svelte-toasts";
+    import {useNavigate, useLocation} from "svelte-navigator"
 
-    const navigate = useNavigate();
-    const location = useLocation();
+	const navigate = useNavigate();
+	const location = useLocation();
 
+    const showToast = (message) => {
+        const toast = toasts.add({
+            title: "Sign Up",
+            description: message,
+            duration: 10000, // 0 or negative to avoid auto-remove
+            placement: "bottom-right",
+            type: "success",
+            onClick: () => {},
+            onRemove: () => {},
+            // component: BootstrapToast, // allows to override toast component/template per toast
+        });
+
+        // toast.remove()
+    };
+
+    let name;
+    let user_name;
     let email;
     let password;
 
-    async function handleLogin(event) {
-        event.preventDefault(); // prevent default form submission behavior
-        const user = { email: email, password: password };
-        console.log(user);
-
+    async function onSubmit(event) {
+        event.preventDefault();
         try {
-            const response = await fetch($BASE_AUTH_URL + "/login", {
+            const newUser = {
+                name: name,
+                user_name: user_name,
+                email: email,
+                password: password
+            }
+            const URL = $BASE_AUTH_URL + "/signUp";
+
+            const response = await fetch(URL, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(user),
+                body: JSON.stringify(newUser),
             });
-
-            const data = await response.json();
-            console.log(data);
-
             if (response.ok) {
-                $SESSION = data.session;
-                // Set a cookie with a name, value and expiration time
-                Cookies.set("user", JSON.stringify(data.session), { expires: 7 });
-                // login successful, redirect to dashboard or home page
-                navigate("/contact", { replace: true });
-            } else {
-                // login failed, show error message or toast
-                console.error("Login failed"); // replace with desired error handling
-                console.error(data.message); // replace with desired error handling
+                const data = await response.json();
+                console.log(data);
+                showToast(data.message);
+                navigate("/login", { replace: true }); 
             }
         } catch (error) {
-            console.error(error); // replace with desired error handling
+            console.error("There was an error:", error);
         }
     }
 </script>
@@ -48,8 +66,22 @@
 <div class="bodyStyle">
     <div class="row login">
         <div class="login">
-            <h1>Login</h1>
-            <form on:submit={handleLogin} method="post">
+            <h1>Sign Up</h1>
+            <form on:submit={onSubmit} method="post">
+                <input
+                    type="text"
+                    name="name"
+                    bind:value={name}
+                    placeholder="Name"
+                    required="required"
+                />
+                <input
+                    type="text"
+                    name="username"
+                    bind:value={user_name}
+                    placeholder="Username"
+                    required="required"
+                />
                 <input
                     type="email"
                     name="email"
@@ -64,23 +96,19 @@
                     placeholder="Password"
                     required="required"
                 />
-                <div class="row gap-2 px-3">
-                    <button
-                        type="submit"
-                        class="btn btn-primary btn-block btn-large col"
-                        >Log In</button
-                    >
-                    <a
-                        class="btn btn-primary btn-block btn-large col"
-                        href="/signUp"
-                    >
-                        Sign Up
-                    </a>
-                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-block btn-large"
+                    >Create User</button
+                >
             </form>
         </div>
     </div>
 </div>
+<ToastContainer placement="bottom-right" let:data>
+    <FlatToast {data} />
+    <!-- Provider template for your toasts -->
+</ToastContainer>
 
 <style>
     @import url(https://fonts.googleapis.com/css?family=Open+Sans);
