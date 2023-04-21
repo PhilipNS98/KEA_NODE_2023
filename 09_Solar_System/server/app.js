@@ -2,7 +2,14 @@ import express from "express";
 
 const app = express();
 
+app.use(express.json());
 
+import planetsRouter from "./routers/planetsRouter.js"
+app.use(planetsRouter);
+
+
+import peopleRouter from "./routers/peopleRouter.js"
+app.use(peopleRouter);
 
 
 
