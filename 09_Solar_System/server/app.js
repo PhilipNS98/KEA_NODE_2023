@@ -4,6 +4,12 @@ const app = express();
 
 app.use(express.json());
 
+import cors from "cors"
+app.use(cors({
+    credentials: true,
+    origin: true,
+}));
+
 import planetsRouter from "./routers/planetsRouter.js"
 app.use(planetsRouter);
 
